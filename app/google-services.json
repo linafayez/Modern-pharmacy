@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1024344755052",
+    "firebase_url": "https://modern-day-pharmacy.firebaseio.com",
+    "project_id": "modern-day-pharmacy",
+    "storage_bucket": "modern-day-pharmacy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024344755052:android:0c7695cc664df364f18149",
+        "android_client_info": {
+          "package_name": "com.example.moderndaypharmacy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024344755052-g1adf588r7jrb646stfm9clephikd843.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVbG0PgZIw2qgnBL4T7_6vd4Ns3m8qeqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024344755052-g1adf588r7jrb646stfm9clephikd843.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
