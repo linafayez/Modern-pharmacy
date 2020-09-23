@@ -2,16 +2,13 @@ package com.example.moderndaypharmacy;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.moderndaypharmacy.Admin.AdminPanel;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser == null){
             auth();
         }
-
-
-
 
     }
 public void auth(){
@@ -97,7 +91,7 @@ public void auth(){
         }
     }
     private void updateUI(@Nullable FirebaseUser user) {
-        Intent done = new Intent(getApplicationContext(),AdminPanel.class);
+        Intent done = new Intent(getApplicationContext(), AdminPanel.class);
         if(user != null){
             startActivity(done);
             finish();

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPage">
+    tools:context=".User.MainPage">
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.moderndaypharmacy.HomePage"
+        android:name="com.example.moderndaypharmacy.User.HomePage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

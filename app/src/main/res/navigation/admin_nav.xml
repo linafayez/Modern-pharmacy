@@ -6,7 +6,7 @@
     app:startDestination="@id/adminHomePage">
     <fragment
         android:id="@+id/adminHomePage"
-        android:name="com.example.moderndaypharmacy.AdminHomePage"
+        android:name="com.example.moderndaypharmacy.Admin.AdminHomePage"
         android:label="fragment_admin_home_page"
         tools:layout="@layout/fragment_admin_home_page" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/addProduct"
-        android:name="com.example.moderndaypharmacy.AddProduct"
+        android:name="com.example.moderndaypharmacy.Admin.AddProduct"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
 </navigation>
