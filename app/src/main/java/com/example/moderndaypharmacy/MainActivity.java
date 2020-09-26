@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.moderndaypharmacy.Admin.AdminPanel;
+import com.example.moderndaypharmacy.User.MainPage;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -91,7 +92,7 @@ public void auth(){
         }
     }
     private void updateUI(@Nullable FirebaseUser user) {
-        Intent done = new Intent(getApplicationContext(), AdminPanel.class);
+        Intent done = new Intent(getApplicationContext(), MainPage.class);
         if(user != null){
             startActivity(done);
             finish();

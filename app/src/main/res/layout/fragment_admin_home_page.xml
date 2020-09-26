@@ -6,27 +6,255 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Admin.AdminHomePage">
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/newProduct"
-                android:layout_margin="3dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_margin="17dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/newOrder"
+                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:text="2" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="new Order" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="FeedBack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/AllOrder"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2" />
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:layout_width="match_parent"
+                            android:textAlignment="center"
+                            android:layout_height="wrap_content"
+                            android:text="All Orders" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/numberNotification"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text"
-                android:background="@drawable/button"
-                android:text="@string/newProduct" />
-        </LinearLayout>
+                android:gravity="center"
+                android:text="3"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:padding="7dp"
+                android:text="Dashboard"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="82dp"
+                android:layout_height="52dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/ic_baseline_notifications_none_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:columnCount="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+                <Button
+                    android:id="@+id/newProduct"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="@string/newProduct"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/newCategory"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                   android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="@string/newCategory"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/editProduct"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="edit or delete product"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/editCategory"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="edit or delete Category"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/newEmployee"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="Add new employee"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/editEmployee"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="remove employee"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/promoCode"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="Promo Code"
+                    android:textColor="@color/text" />
+
+                <Button
+                    android:id="@+id/feedBack"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/button"
+                    android:text="Review Feed Back"
+                    android:textColor="@color/text" />
+
+
+            </GridLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

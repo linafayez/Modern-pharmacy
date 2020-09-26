@@ -23,21 +23,30 @@
             <androidx.cardview.widget.CardView
                 android:layout_margin="3dp"
                 android:layout_width="match_parent"
-                android:layout_height="235dp"
+                android:layout_height="210dp"
 
                  >
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/back"
                     android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                       android:layout_margin="8dp"
+                        android:src="@drawable/delete"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
                         android:id="@+id/imageView2"
                         android:layout_width="217dp"
                         android:layout_height="133dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="28dp"
                         android:src="@drawable/product"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.496"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,12 +83,14 @@
                 android:layout_margin="7dp"
                 android:background="@drawable/edit_text"
                 android:hint="Price"
-                android:inputType="number" />
+                android:numeric="integer"
+                android:inputType="numberDecimal" />
 
             <EditText
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="130dp"
+                android:layout_marginTop="20dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:layout_margin="7dp"
@@ -88,7 +99,7 @@
                 android:inputType="textMultiLine" />
 
             <EditText
-                android:id="@+id/istemNumber"
+                android:id="@+id/itemNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -107,6 +118,8 @@
                 android:text="Add Image"
                 android:textStyle="bold"/>
 
+
+
             <HorizontalScrollView
                 android:id="@+id/switchImage"
                 android:layout_width="match_parent"
@@ -124,13 +137,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
-
+            <Button
+                android:id="@+id/UploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:textColor="@color/text"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                android:background="@drawable/button"
+                android:text="Upload Image" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ProgressBar
                     android:id="@+id/progressBar"
+                    android:visibility="invisible"
                     style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,6 +162,7 @@
                     app:layout_constraintTop_toTopOf="@+id/UploadProduct" />
 
                 <Button
+                    android:visibility="invisible"
                     android:id="@+id/UploadProduct"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

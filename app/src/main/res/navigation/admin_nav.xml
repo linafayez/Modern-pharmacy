@@ -12,10 +12,26 @@
         <action
             android:id="@+id/action_adminHomePage_to_addProduct"
             app:destination="@id/addProduct" />
+        <action
+            android:id="@+id/action_adminHomePage_to_addCategory"
+            app:destination="@id/addCategory" />
+        <action
+            android:id="@+id/action_adminHomePage_to_categories"
+            app:destination="@id/categories" />
     </fragment>
     <fragment
         android:id="@+id/addProduct"
         android:name="com.example.moderndaypharmacy.Admin.AddProduct"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
+    <fragment
+        android:id="@+id/addCategory"
+        android:name="com.example.moderndaypharmacy.Admin.AddCategory"
+        android:label="fragment_add_category"
+        tools:layout="@layout/fragment_add_category" />
+    <fragment
+        android:id="@+id/categories"
+        android:name="com.example.moderndaypharmacy.User.Categories"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
 </navigation>
