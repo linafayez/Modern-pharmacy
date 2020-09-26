@@ -1,6 +1,7 @@
 package com.example.moderndaypharmacy;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductModel {
     private String name;
@@ -10,16 +11,18 @@ public class ProductModel {
     private String ID;
     private ArrayList<String> thumbnailPic;
     private ArrayList<String> pic;
+    private String category_id ;
 
      public ProductModel(){
      }
-    public ProductModel(String ID,String name, int price,String desc, int itemNumber,ArrayList<String> pic) {
+    public ProductModel(String ID,String name, int price,String desc, int itemNumber,ArrayList<String> pic,String category_id) {
         this.name = name;
         this.price = price;
         this.desc = desc;
         this.pic =pic;
         this.ID =ID;
         this.itemNumber = itemNumber;
+        this.category_id = category_id;
 
     }
     public ProductModel(String ID,String name, int price,String desc, int itemNumber,ArrayList<String> pic,ArrayList<String> thumbnailPic) {
@@ -85,5 +88,13 @@ public class ProductModel {
 
     public void setPic(ArrayList<String> pic) {
         this.pic = pic;
+    }
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 }

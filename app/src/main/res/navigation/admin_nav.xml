@@ -10,9 +10,6 @@
         android:label="fragment_admin_home_page"
         tools:layout="@layout/fragment_admin_home_page" >
         <action
-            android:id="@+id/action_adminHomePage_to_addProduct"
-            app:destination="@id/addProduct" />
-        <action
             android:id="@+id/action_adminHomePage_to_addCategory"
             app:destination="@id/addCategory" />
         <action
@@ -33,5 +30,17 @@
         android:id="@+id/categories"
         android:name="com.example.moderndaypharmacy.User.Categories"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categories_to_addCategory"
+            app:destination="@id/addCategory" />
+        <action
+            android:id="@+id/action_categories_to_addProduct"
+            app:destination="@id/addProduct" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.moderndaypharmacy.User.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

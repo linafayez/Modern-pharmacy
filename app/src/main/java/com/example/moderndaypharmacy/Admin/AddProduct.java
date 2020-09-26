@@ -63,6 +63,7 @@ public class AddProduct extends Fragment {
     int uploadCont = 0;
     HorizontalScrollView switchImage;
     LinearLayout imageGallery;
+    String category_id;
     private StorageReference mStorageRef;
 
     FirebaseFirestore db ;
@@ -101,9 +102,11 @@ public class AddProduct extends Fragment {
         pd.setMessage("Uploading....");
         String type = getArguments().getString("type");
         if (type.equals("new")) {
+            category_id =getArguments().getString("category");
             delete.setVisibility(View.INVISIBLE);
             uniqueID = db.collection("Products").document().getId();
         } else {
+            category_id = product.getCategory_id();
             textView.setText("Edit or delete product");
             addImage.setText("Edit Image");
             UploadProduct.setText("Update Data");
@@ -257,10 +260,13 @@ public class AddProduct extends Fragment {
         Toast.makeText(getContext(),"Done Upload Image",Toast.LENGTH_LONG).show();
     }
     public void UploadProduct(){
+        int P =0;
         pd.show();
-      int P = (int) (Double.parseDouble(price.getText().toString())*100);
+        if(price.getText()!=null) {
+             P = (int) (Double.parseDouble(price.getText().toString()) * 100);
+        }
    //     Toast.makeText(getActivity(),""+P,Toast.LENGTH_SHORT).show();
-        product = new ProductModel(uniqueID,name.getText().toString(),P,desc.getText().toString(),Integer.parseInt(itemNumber.getText().toString()),listImage);
+        product = new ProductModel(uniqueID,name.getText().toString(),P,desc.getText().toString(),Integer.parseInt(itemNumber.getText().toString()),listImage,category_id);
         db.collection("Products").document(uniqueID)
                 .set(product)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
