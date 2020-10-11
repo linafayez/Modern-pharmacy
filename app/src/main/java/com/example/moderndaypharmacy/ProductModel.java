@@ -8,12 +8,15 @@ public class ProductModel {
     private int price;
     private String desc;
     private int itemNumber;
+    private int itemNumberInCart;
     private String ID;
     private ArrayList<String> thumbnailPic;
     private ArrayList<String> pic;
     private String category_id ;
 
+
      public ProductModel(){
+         setItemNumberInCart(0);
      }
     public ProductModel(String ID,String name, int price,String desc, int itemNumber,ArrayList<String> pic,String category_id) {
         this.name = name;
@@ -23,6 +26,7 @@ public class ProductModel {
         this.ID =ID;
         this.itemNumber = itemNumber;
         this.category_id = category_id;
+        setItemNumberInCart(0);
 
     }
     public ProductModel(String ID,String name, int price,String desc, int itemNumber,ArrayList<String> pic,ArrayList<String> thumbnailPic) {
@@ -96,5 +100,13 @@ public class ProductModel {
 
     public void setCategory_id(String category_id) {
         this.category_id = category_id;
+    }
+
+    public int getItemNumberInCart() {
+        return itemNumberInCart;
+    }
+
+    public void setItemNumberInCart(int itemNumberInCart) {
+        this.itemNumberInCart = itemNumberInCart;
     }
 }

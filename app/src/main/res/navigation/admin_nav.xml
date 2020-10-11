@@ -43,4 +43,9 @@
         android:name="com.example.moderndaypharmacy.User.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/ordersManagement"
+        android:name="com.example.moderndaypharmacy.Admin.OrdersManagement"
+        android:label="fragment_orders_management"
+        tools:layout="@layout/fragment_orders_management" />
 </navigation>

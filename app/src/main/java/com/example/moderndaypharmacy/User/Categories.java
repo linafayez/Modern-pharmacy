@@ -59,17 +59,6 @@ RecyclerView recyclerView;
         response = new FirestoreRecyclerOptions.Builder<CategoryModel>()
                 .setQuery(query, CategoryModel.class)
                 .build();
-//        db.collection("Category").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                queryDocumentSnapshots.getDocuments();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//
-//            }
-//        });
          adapter = new FirestoreRecyclerAdapter<CategoryModel, CategoryHolder>(response) {
             @NonNull
             @Override
@@ -124,6 +113,7 @@ RecyclerView recyclerView;
                         bundle.putString("type", "new");
                         bundle.putString("category",response.getSnapshots().get(getAdapterPosition()).getId());
                         Navigation.createNavigateOnClickListener(R.id.action_categories_to_addProduct, bundle).onClick(getView());
+                        Navigation.findNavController(getView()).navigateUp();
                     }
                 }
             });
