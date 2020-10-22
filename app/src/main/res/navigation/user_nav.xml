@@ -10,4 +10,9 @@
         android:name="com.example.moderndaypharmacy.User.HomePage"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/products"
+        android:name="com.example.moderndaypharmacy.User.Products"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" />
 </navigation>
