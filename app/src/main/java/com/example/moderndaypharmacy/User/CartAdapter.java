@@ -64,7 +64,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         ImageView image , del;
         Button dec, inc;
 
-        SharedPreferance sharedPreference = new SharedPreferance();
+        SharedPreference sharedPreference = new SharedPreference(view.getContext());
         public CartViewHolder(@NonNull View view) {
             super(view);
             this.view=view;
@@ -86,7 +86,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                         productModel.setItemNumberInCart(a);
                         cartList.set(getAdapterPosition(),productModel);
                         price.setText((((double) productModel.getPrice())/100 *a)+"JD");
-                        sharedPreference.SaveCart(view.getContext(),cartList);
+                        sharedPreference.SaveCart(cartList);
 
                         c.total(((double) productModel.getPrice())/100);
                     }
@@ -102,7 +102,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                         productModel.setItemNumberInCart(a);
                         cartList.set(getAdapterPosition(),productModel);
                         price.setText((double) productModel.getPrice()/100 *a+"JD");
-                        sharedPreference.SaveCart(view.getContext(),cartList);
+                        sharedPreference.SaveCart(cartList);
                         c.total(-(double) productModel.getPrice()/100);
 
                     }
@@ -116,7 +116,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     double   pr = Double.parseDouble(price.getText().toString().split("JD")[0]);
                     c.total(-pr);
                     cartList.remove(productModel);
-                    sharedPreference.SaveCart(view.getContext(),cartList);
+                    sharedPreference.SaveCart(cartList);
                     notifyDataSetChanged();
                     Toast.makeText(view.getContext(),"Item removed", Toast.LENGTH_SHORT).show();
                 }

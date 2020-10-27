@@ -10,4 +10,9 @@
         android:name="com.example.moderndaypharmacy.User.HomePage"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/cart"
+        android:name="com.example.moderndaypharmacy.User.Cart"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>
