@@ -39,7 +39,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         if(P.getItemNumberInCart() == 0){
             P.setItemNumberInCart(1);
         }
-        holder.ItemsCount.setText(P.getItemNumber());
+        holder.ItemsCount.setText(P.getItemNumberInCart()+"");
         double   price = ((double) P.getPrice())/100;
         int number = P.getItemNumberInCart();
 
@@ -57,17 +57,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         }
     }
 
-    public class CartViewHolder extends RecyclerView.ViewHolder{
+     class CartViewHolder extends RecyclerView.ViewHolder{
         View view;
         TextView price , ItemsCount ;
         TextView name;
         ImageView image , del;
         Button dec, inc;
 
-        SharedPreference sharedPreference = new SharedPreference(view.getContext());
+        SharedPreference sharedPreference ;
         public CartViewHolder(@NonNull View view) {
             super(view);
             this.view=view;
+            sharedPreference = new SharedPreference(view.getContext());
             price = (TextView) view.findViewById(R.id.price);
             name =(TextView) view.findViewById(R.id.name);
             image = (ImageView) view.findViewById(R.id.productImage);

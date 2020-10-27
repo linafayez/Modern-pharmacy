@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 
 public class Products extends Fragment {
@@ -81,14 +84,28 @@ RecyclerView Products;
         super.onStop();
         adapter.stopListening();
     }
-    static class ProductHolder extends RecyclerView.ViewHolder{
+    class ProductHolder extends RecyclerView.ViewHolder{
+       SharedPreference sharedPreference ;
 TextView name , price;
 ImageView image;
+Button addToCart;
         public ProductHolder(@NonNull View itemView) {
             super(itemView);
+            sharedPreference = new SharedPreference(itemView.getContext());
+            addToCart =itemView.findViewById(R.id.addToCart);
             name = itemView.findViewById(R.id.name);
             price = itemView.findViewById(R.id.price);
             image = itemView.findViewById(R.id.proImage);
+            addToCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ProductModel model = response.getSnapshots().get(getAdapterPosition());
+                    if(model.getItemNumberInCart() == 0){
+                        model.setItemNumberInCart(1);
+                    }
+                    sharedPreference.addToCart(model);
+                }
+            });
 
         }
 

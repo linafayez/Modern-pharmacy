@@ -2,6 +2,7 @@ package com.example.moderndaypharmacy.User;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.example.moderndaypharmacy.ProductModel;
 import com.google.gson.Gson;
@@ -31,12 +32,22 @@ public class SharedPreference {
     }
     public void addToCart(ProductModel product) {
         ArrayList<ProductModel> productModelList = getCartData();
-
-
-
-        if (productModelList == null )
+        boolean have = false;
+        if (productModelList == null ) {
             productModelList = new ArrayList<ProductModel>();
-        productModelList.add(product);
+        }else{
+           for (int i=0;i<productModelList.size();i++){
+              if(productModelList.get(i).getID().equals(product.getID())){
+                  have=true;
+                  break;
+              }
+            }
+        }
+        if(have == false)
+           productModelList.add(product);
+        else{
+            Toast.makeText(context,"from past",Toast.LENGTH_LONG).show();
+        }
         SaveCart( productModelList);
     }
 

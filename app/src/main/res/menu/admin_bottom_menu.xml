@@ -10,6 +10,7 @@
         android:title="Home" />
     <item
         android:icon="@drawable/ic_baseline_calendar_view_day_24"
+        android:id="@+id/ordersManagement"
         app:showAsAction="always"
         android:orderInCategory="2"
         android:title="Orders" />
