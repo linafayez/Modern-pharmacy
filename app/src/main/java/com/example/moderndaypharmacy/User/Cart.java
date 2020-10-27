@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class Cart extends Fragment {
     RecyclerView recyclerView;
-    SharedPreferance sharedPreference;
+    SharedPreference sharedPreference;
     ArrayList<ProductModel> data;
-    Double sum;
+
     RecyclerView.Adapter adapter;
     static TextView total;
 
@@ -40,11 +40,12 @@ public class Cart extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        total = view.findViewById(R.id.total);
         recyclerView = view.findViewById(R.id.recyclerView);
-        sharedPreference = new SharedPreferance();
-        sum = 0.0;
+        sharedPreference = new SharedPreference(getContext());
+        double sum= 0.0;
         data = new ArrayList<>();
-        data = sharedPreference.getCartData(getContext());
+        data = sharedPreference.getCartData();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         if (data != null) {
             for (int i = 0; i < data.size(); i++) {

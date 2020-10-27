@@ -7,7 +7,7 @@
     tools:context=".User.MainPage">
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.moderndaypharmacy.User.HomePage"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

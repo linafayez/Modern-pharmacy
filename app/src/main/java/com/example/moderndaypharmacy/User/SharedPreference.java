@@ -10,8 +10,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SharedPreferance {
-    public static void SaveCart(Context context, List<ProductModel> pro) {
+public class SharedPreference {
+    static Context context;
+    public SharedPreference(Context context){
+        this.context =context;
+    }
+    public static void SaveCart(List<ProductModel> pro) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
 
@@ -25,20 +29,20 @@ public class SharedPreferance {
 
         editor.apply();
     }
-    public void addToCart(Context context, ProductModel product) {
-        ArrayList<ProductModel> productModelList = getCartData(context);
+    public void addToCart(ProductModel product) {
+        ArrayList<ProductModel> productModelList = getCartData();
 
 
 
         if (productModelList == null )
             productModelList = new ArrayList<ProductModel>();
         productModelList.add(product);
-        SaveCart(context, productModelList);
+        SaveCart( productModelList);
     }
 
 
 
-    public ArrayList<ProductModel> getCartData(Context context) {
+    public ArrayList<ProductModel> getCartData() {
         SharedPreferences settings;
         List<ProductModel> productModels;
 

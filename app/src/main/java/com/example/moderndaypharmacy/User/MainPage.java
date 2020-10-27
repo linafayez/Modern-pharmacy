@@ -16,9 +16,9 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        //fragment2
-        BottomNavigationView bottomNav = findViewById(R.id.bottomBar);
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         NavController nav = Navigation.findNavController(this,R.id.fragment2);
         NavigationUI.setupWithNavController(bottomNav , nav);
+
     }
 }
