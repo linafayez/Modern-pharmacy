@@ -15,4 +15,9 @@
         android:name="com.example.moderndaypharmacy.User.Products"
         android:label="fragment_products"
         tools:layout="@layout/fragment_products" />
+    <fragment
+        android:id="@+id/cart"
+        android:name="com.example.moderndaypharmacy.User.Cart"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>
