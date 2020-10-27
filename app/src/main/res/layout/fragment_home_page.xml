@@ -65,6 +65,7 @@
         app:layout_constraintVertical_bias="0.096">
 
         <LinearLayout
+            android:id="@+id/products"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|center_vertical"

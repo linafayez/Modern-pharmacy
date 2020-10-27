@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.moderndaypharmacy.R;
 
 public class HomePage extends Fragment {
+    LinearLayout product;
     public HomePage() {
         // Required empty public constructor
     }
@@ -33,7 +34,13 @@ public class HomePage extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+      product = view.findViewById(R.id.products);
+      product.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Navigation.findNavController(getView()).navigate(R.id.action_homePage_to_products);
+          }
+      });
 
     }
 }
