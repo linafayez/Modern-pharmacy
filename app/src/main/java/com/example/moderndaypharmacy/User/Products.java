@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 
 public class Products extends Fragment {
-RecyclerView Products;
+   RecyclerView Products;
     FirebaseFirestore db ;
     FirestoreRecyclerAdapter adapter;
     FirestoreRecyclerOptions <ProductModel> response;

@@ -1,20 +1,38 @@
 package com.example.moderndaypharmacy.Admin;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.moderndaypharmacy.OrderModel;
+import com.example.moderndaypharmacy.ProductModel;
 import com.example.moderndaypharmacy.R;
+import com.example.moderndaypharmacy.User.Products;
+import com.example.moderndaypharmacy.User.SharedPreference;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
 
 public class OrdersManagement extends Fragment {
-    //RecyclerView orders ;
+    RecyclerView Orders;
+    FirebaseFirestore db ;
+    FirestoreRecyclerAdapter adapter;
+    FirestoreRecyclerOptions<OrderModel> response;
     public OrdersManagement() {
         // Required empty public constructor
     }
@@ -27,8 +45,47 @@ public class OrdersManagement extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-      //  orders = view.findViewById(R.id.orders);
+       super.onViewCreated(view, savedInstanceState);
+       Orders = view.findViewById(R.id.orders);
+        db= FirebaseFirestore.getInstance();
+        Query query = db.collection("Orders");
+        response = new FirestoreRecyclerOptions.Builder<OrderModel>()
+                .setQuery(query, OrderModel.class)
+                .build();
+        adapter = new FirestoreRecyclerAdapter<OrderModel, OrderHolder>(response) {
+            @NonNull
+            @Override
+            public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_order,parent,false);
+                return new OrderHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull OrderHolder holder, int position, @NonNull OrderModel model) {
+                   }
+        };
+        Orders.setLayoutManager( new LinearLayoutManager(getContext()));
+        Orders.setHasFixedSize(false);
+        Orders.setAdapter(adapter);
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+    class OrderHolder extends RecyclerView.ViewHolder{
+
+        public OrderHolder(@NonNull View itemView) {
+            super(itemView);
+
+
+        }
 
     }
 }
