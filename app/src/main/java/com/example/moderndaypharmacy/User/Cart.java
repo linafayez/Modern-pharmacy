@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.moderndaypharmacy.ProductModel;
@@ -22,7 +24,7 @@ public class Cart extends Fragment {
     RecyclerView recyclerView;
     SharedPreference sharedPreference;
     ArrayList<ProductModel> data;
-
+Button checkout;
     RecyclerView.Adapter adapter;
     static TextView total;
 
@@ -41,6 +43,7 @@ public class Cart extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         total = view.findViewById(R.id.total);
+        checkout = view.findViewById(R.id.checkout);
         recyclerView = view.findViewById(R.id.recyclerView);
         sharedPreference = new SharedPreference(getContext());
         double sum= 0.0;
@@ -63,6 +66,12 @@ public class Cart extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(adapter);
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_cart_to_checkout);
+            }
+        });
 
 
     }
@@ -71,6 +80,11 @@ public class Cart extends Fragment {
         public void total(double t) {
             double price = Double.parseDouble(total.getText().toString().split("JD")[0]);
             total.setText(price + t + "JD");
+
         }
+
+
+
     }
+
 }
