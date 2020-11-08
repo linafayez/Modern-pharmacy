@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_margin="7dp"
     android:layout_height="250dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -109,6 +110,7 @@
         <ScrollView
             android:layout_width="189dp"
             android:layout_height="157dp"
+            android:padding="12dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -121,6 +123,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textSize="18dp"
                     android:id="@+id/productList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

@@ -19,7 +19,9 @@ public class OrderModel {
         this.orderState = orderState;
         this.total = total;
     }
+public OrderModel(){
 
+}
     public ArrayList<ProductModel> getProductList() {
         return productList;
     }
