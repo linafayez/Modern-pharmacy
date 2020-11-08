@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.moderndaypharmacy.ProductModel;
+import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
 
 import java.util.ArrayList;

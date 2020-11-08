@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
-import com.example.moderndaypharmacy.ProductModel;
+import com.example.moderndaypharmacy.Models.ProductModel;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

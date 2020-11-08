@@ -16,16 +16,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.moderndaypharmacy.CategoryModel;
-import com.example.moderndaypharmacy.ProductModel;
+import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 
 public class Products extends Fragment {

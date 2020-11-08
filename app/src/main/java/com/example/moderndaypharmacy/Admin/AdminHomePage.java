@@ -19,7 +19,7 @@ import com.example.moderndaypharmacy.R;
 import java.util.Objects;
 
 public class AdminHomePage extends Fragment {
-Button newProduct,newCategory, editCategory;
+Button newProduct,newCategory, editCategory , newPromoCode;
     public AdminHomePage() {
         // Required empty public constructor
     }
@@ -35,6 +35,7 @@ Button newProduct,newCategory, editCategory;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newProduct = view.findViewById(R.id.newProduct);
+        newPromoCode = view.findViewById(R.id.promoCode);
         newCategory= view.findViewById(R.id.newCategory);
         editCategory = view.findViewById(R.id.editCategory);
         final Bundle bundle = new Bundle();
@@ -49,6 +50,12 @@ Button newProduct,newCategory, editCategory;
         bundle2.putString("type","editCategory");
         View.OnClickListener edit = Navigation.createNavigateOnClickListener(R.id.action_adminHomePage_to_categories,bundle2);
         editCategory.setOnClickListener(edit);
+        newPromoCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.addPromoCode);
+            }
+        });
 
     }
 }

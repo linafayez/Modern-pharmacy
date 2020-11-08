@@ -1,4 +1,4 @@
-package com.example.moderndaypharmacy;
+package com.example.moderndaypharmacy.Models;
 
 import java.util.ArrayList;
 import java.util.Locale;

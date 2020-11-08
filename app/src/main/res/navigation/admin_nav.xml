@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_adminHomePage_to_categories"
             app:destination="@id/categories" />
+        <action
+            android:id="@+id/action_adminHomePage_to_addPromoCode"
+            app:destination="@id/addPromoCode" />
     </fragment>
     <fragment
         android:id="@+id/addProduct"
@@ -48,4 +51,9 @@
         android:name="com.example.moderndaypharmacy.Admin.OrdersManagement"
         android:label="fragment_orders_management"
         tools:layout="@layout/fragment_orders_management" />
+    <fragment
+        android:id="@+id/addPromoCode"
+        android:name="com.example.moderndaypharmacy.Admin.AddPromoCode"
+        android:label="fragment_add_promo_code"
+        tools:layout="@layout/fragment_add_promo_code" />
 </navigation>

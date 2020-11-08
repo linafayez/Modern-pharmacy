@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.moderndaypharmacy.ProductModel;
+import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
 import com.squareup.picasso.Picasso;
 

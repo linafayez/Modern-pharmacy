@@ -1,4 +1,4 @@
-package com.example.moderndaypharmacy;
+package com.example.moderndaypharmacy.Models;
 
 import com.google.firebase.Timestamp;
 import java.util.ArrayList;

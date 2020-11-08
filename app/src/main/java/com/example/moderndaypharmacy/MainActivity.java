@@ -93,7 +93,7 @@ public void auth(){
         }
     }
     private void updateUI(@Nullable FirebaseUser user) {
-        Intent done = new Intent(getApplicationContext(), MainPage.class);
+        Intent done = new Intent(getApplicationContext(), AdminPanel.class);
         if(user != null){
             startActivity(done);
             finish();

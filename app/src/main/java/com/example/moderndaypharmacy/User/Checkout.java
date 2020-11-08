@@ -16,8 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.moderndaypharmacy.OrderModel;
-import com.example.moderndaypharmacy.ProductModel;
+import com.example.moderndaypharmacy.Models.OrderModel;
+import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
 import com.example.moderndaypharmacy.User.SharedPreference;
 import com.google.android.gms.tasks.OnSuccessListener;

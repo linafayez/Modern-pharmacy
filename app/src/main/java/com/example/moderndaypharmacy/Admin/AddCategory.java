@@ -25,7 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.moderndaypharmacy.CategoryModel;
+import com.example.moderndaypharmacy.Models.CategoryModel;
 import com.example.moderndaypharmacy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

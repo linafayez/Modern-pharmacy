@@ -1,4 +1,4 @@
-package com.example.moderndaypharmacy;
+package com.example.moderndaypharmacy.Models;
 
 public class CategoryModel {
     private String name,desc, image,id;
