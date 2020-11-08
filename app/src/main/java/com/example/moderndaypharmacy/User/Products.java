@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 
@@ -103,6 +105,18 @@ Button addToCart;
                     sharedPreference.addToCart(model);
                 }
             });
+            final Bundle bundle = new Bundle();
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!getArguments().equals(null) && getArguments().get("type").equals("editProduct")){
+                        Gson gson = new Gson();
+                        bundle.putString("type", gson.toJson(response.getSnapshots().get(getAdapterPosition())));
+                        Navigation.findNavController(getView()).navigate(R.id.action_products2_to_addProduct,bundle);
+                    }
+                }
+            });
+
 
         }
 

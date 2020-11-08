@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_categories_to_addProduct"
             app:destination="@id/addProduct" />
+        <action
+            android:id="@+id/action_categories_to_products2"
+            app:destination="@id/products2" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -56,4 +59,13 @@
         android:name="com.example.moderndaypharmacy.Admin.AddPromoCode"
         android:label="fragment_add_promo_code"
         tools:layout="@layout/fragment_add_promo_code" />
+    <fragment
+        android:id="@+id/products2"
+        android:name="com.example.moderndaypharmacy.User.Products"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_products2_to_addProduct"
+            app:destination="@id/addProduct" />
+    </fragment>
 </navigation>

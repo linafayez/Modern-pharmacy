@@ -104,7 +104,12 @@ RecyclerView recyclerView;
                         bundle.putString("type", "new");
                         bundle.putString("category",response.getSnapshots().get(getAdapterPosition()).getId());
                         Navigation.createNavigateOnClickListener(R.id.action_categories_to_addProduct, bundle).onClick(getView());
-                        Navigation.findNavController(getView()).navigateUp();
+                       // Navigation.findNavController(getView()).navigateUp();
+                    }
+                    if (getArguments().getString("type").equals("editProduct")) {
+                        bundle.putString("type", "editProduct");
+                        Navigation.findNavController(getView()).navigate(R.id.action_categories_to_products2,bundle);
+                        // Navigation.findNavController(getView()).navigateUp();
                     }
                 }
             });

@@ -38,6 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -105,10 +106,27 @@ public class AddProduct extends Fragment {
             delete.setVisibility(View.INVISIBLE);
             uniqueID = db.collection("Products").document().getId();
         } else {
+
+            Gson gson = new Gson();
+           product = gson.fromJson(type,ProductModel.class);
             category_id = product.getCategory_id();
+            uniqueID = product.getID();
             textView.setText("Edit or delete product");
             addImage.setText("Edit Image");
             UploadProduct.setText("Update Data");
+            name.setText(product.getName());
+            price.setText(""+product.getPrice()*100);
+            desc.setText(product.getDesc());
+            itemNumber.setText(product.getItemNumber()+"");
+            listImage = product.getPic();
+            itemNumber.setText("" + product.getItemNumber());
+            for (int i = 0; i < product.getPic().size(); i++) {
+                mArrayUri.add(Uri.parse(product.getPic().get(i)));
+            }
+            setImage(mArrayUri);
+            UploadProduct.setVisibility(View.VISIBLE);
+
+
         }
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
