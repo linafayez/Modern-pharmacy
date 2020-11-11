@@ -7,18 +7,32 @@
     tools:context=".User.UserInfo">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="132dp"
-        android:layout_height="132dp"
-        android:layout_margin="35dp"
-        android:src="@drawable/ic_baseline_add_a_photo_24"
-        app:civ_border_color="@color/base"
-        app:civ_border_width="2dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:src="@drawable/ic_baseline_add_a_photo_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.61" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
@@ -30,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image">
+        app:layout_constraintTop_toBottomOf="@+id/card">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
