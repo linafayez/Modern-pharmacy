@@ -12,6 +12,7 @@
         android:icon="@drawable/ic_baseline_star_border_24"
         android:title="Order" />
     <item
+        android:id="@+id/profile2"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profile" />
 

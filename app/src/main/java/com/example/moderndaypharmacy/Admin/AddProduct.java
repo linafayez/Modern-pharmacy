@@ -5,11 +5,10 @@ import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
+import android.content.res.Resources;  
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -284,6 +283,7 @@ public class AddProduct extends Fragment {
         }
    //     Toast.makeText(getActivity(),""+P,Toast.LENGTH_SHORT).show();
         product = new ProductModel(uniqueID,name.getText().toString(),P,desc.getText().toString(),Integer.parseInt(itemNumber.getText().toString()),listImage,category_id);
+
         db.collection("Products").document(uniqueID)
                 .set(product)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

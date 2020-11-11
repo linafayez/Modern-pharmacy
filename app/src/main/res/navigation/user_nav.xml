@@ -34,4 +34,23 @@
         android:name="com.example.moderndaypharmacy.User.Checkout"
         android:label="fragment_checkout"
         tools:layout="@layout/fragment_checkout" />
+    <fragment
+        android:id="@+id/profile2"
+        android:name="com.example.moderndaypharmacy.User.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile2_to_userInfo2"
+            app:destination="@id/userInfo2" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfo2"
+        android:name="com.example.moderndaypharmacy.User.UserInfo"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" >
+        <argument
+            android:name="user"
+            app:argType="com.example.moderndaypharmacy.Models.UserInfoModel"
+            app:nullable="true" />
+    </fragment>
 </navigation>

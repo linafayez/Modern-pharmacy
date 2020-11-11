@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.moderndaypharmacy.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_userInfo3"
+            app:destination="@id/userInfo3" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfo3"
+        android:name="com.example.moderndaypharmacy.User.UserInfo"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" >
+        <argument
+            android:name="user"
+            app:argType="com.example.moderndaypharmacy.Models.UserInfoModel"
+            app:nullable="true" />
+    </fragment>
+</navigation>
