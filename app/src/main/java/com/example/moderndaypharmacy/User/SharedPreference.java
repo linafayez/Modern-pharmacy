@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.moderndaypharmacy.Models.ProductModel;
+import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -16,10 +17,43 @@ public class SharedPreference {
     public SharedPreference(Context context){
         this.context =context;
     }
+
+    public static void addUser(UserInfoModel userObject){
+        SharedPreferences user;
+        SharedPreferences.Editor editorUser;
+        user = context.getSharedPreferences("User",
+                Context.MODE_PRIVATE);
+        editorUser = user.edit();
+
+        Gson gson = new Gson();
+        String userString = gson.toJson(userObject);
+        editorUser.putString("user", userString);
+
+        editorUser.apply();
+    }
+
+    public static UserInfoModel getUser(){
+        SharedPreferences settings;
+        UserInfoModel user;
+
+        settings = context.getSharedPreferences("User",
+                Context.MODE_PRIVATE);
+
+        if (settings.contains("user")) {
+            String u = settings.getString("user", null);
+            Gson gson = new Gson();
+             user = gson.fromJson(u,
+                    UserInfoModel.class);
+
+        }else {
+            user = null;
+        }
+
+        return user;
+    }
     public static void SaveCart(List<ProductModel> pro) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
-
         settings = context.getSharedPreferences("ProductCart",
                 Context.MODE_PRIVATE);
         editor = settings.edit();

@@ -84,6 +84,8 @@ public class Profile extends Fragment {
                 .setMessage("Are you sure to sign out?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        SharedPreference sharedPreference = new SharedPreference(getContext());
+                        sharedPreference.addUser(null);
                         FirebaseAuth.getInstance().signOut();
                         Intent i = new Intent(getActivity(),
                                 MainActivity.class);

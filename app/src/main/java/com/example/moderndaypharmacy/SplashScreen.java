@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.moderndaypharmacy.Admin.AdminPanel;
 import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.example.moderndaypharmacy.User.MainPage;
+import com.example.moderndaypharmacy.User.SharedPreference;
 import com.example.moderndaypharmacy.User.UserInfo;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -114,8 +116,9 @@ public class SplashScreen extends Fragment {
             }
         }
     }
-    private void updateUI(@Nullable FirebaseUser user) {
+    public void updateUI(@Nullable FirebaseUser user) {
         if(user != null){
+            final SharedPreference sharedPreference = new SharedPreference(getContext());
         FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -123,7 +126,15 @@ public class SplashScreen extends Fragment {
                 if(userInfo == null){
                    Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(null));
                 }else{
-                    Intent done = new Intent(getContext(), MainPage.class);
+                    sharedPreference.addUser(userInfo);
+                    Toast.makeText(getContext(),userInfo.getType(),Toast.LENGTH_LONG).show();
+                    Intent done ;
+                    if(userInfo.getType().equals("User")){
+                         done = new Intent(getContext(), MainPage.class);
+                    }else {
+                        Toast.makeText(getContext(),userInfo.getType(),Toast.LENGTH_LONG).show();
+                         done = new Intent(getContext(), AdminPanel.class);
+                    }
                     startActivity(done);
                 }
             }

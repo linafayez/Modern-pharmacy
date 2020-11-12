@@ -2,19 +2,27 @@ package com.example.moderndaypharmacy;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.moderndaypharmacy.Admin.AdminHomePage;
 import com.example.moderndaypharmacy.Admin.AdminPanel;
+import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.example.moderndaypharmacy.User.MainPage;
+import com.example.moderndaypharmacy.User.SharedPreference;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,6 +77,35 @@ public void auth(){
     };
     thread.start();
 }
+    public void updateUI(@Nullable FirebaseUser user) {
+        if(user != null){
+            final SharedPreference sharedPreference = new SharedPreference(MainActivity.this);
+            FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    UserInfoModel userInfo = documentSnapshot.toObject(UserInfoModel.class);
+                    if(userInfo == null){
+                        //   Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(null));
+                    }else{
+                        sharedPreference.addUser(userInfo);
+                        Toast.makeText(MainActivity.this,userInfo.getType(),Toast.LENGTH_LONG).show();
+                        Intent done ;
+                        if(userInfo.getType().equals("User")){
+                            done = new Intent(MainActivity.this, MainPage.class);
+                        }else {
+                            Toast.makeText(MainActivity.this,userInfo.getType(),Toast.LENGTH_LONG).show();
+                            done = new Intent(MainActivity.this, AdminPanel.class);
+                        }
+                        startActivity(done);
+                    }
+                }
+            });
+
+
+        }else{
+            //  auth();
+        }
+    }
 
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -92,14 +129,29 @@ public void auth(){
 //            }
 //        }
 //    }
-    private void updateUI(@Nullable FirebaseUser user) {
-        Intent done = new Intent(getApplicationContext(), MainPage.class);
-        if(user != null){
-            startActivity(done);
-        }else{
-          //  auth();
-        }
-    }
+//    private void updateUI(@Nullable FirebaseUser user) {
+//        final SharedPreference sharedPreference = new SharedPreference(getApplicationContext());
+//        if(user != null){
+//
+//            Intent done;
+//           UserInfoModel userInfoModel= sharedPreference.getUser();
+//           if(userInfoModel==null)
+//            Toast.makeText(getApplicationContext(),"userInfoModel.getName()",Toast.LENGTH_LONG).show();
+//           if(userInfoModel != null && userInfoModel.getType().equals("User")){
+//              done = new Intent(getApplicationContext(), MainPage.class);
+//
+//           }else {
+//                done = new Intent(getApplicationContext(), AdminPanel.class);
+//
+//           }
+//            startActivity(done);
+////        Intent done = new Intent(getApplicationContext(), MainPage.class);
+////
+////            startActivity(done);
+//        }else{
+//          //  auth();
+//        }
+ //   }
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -107,6 +159,7 @@ public void auth(){
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         updateUI(currentUser);
     }
+
 
     @Override
     protected void onStart() {
