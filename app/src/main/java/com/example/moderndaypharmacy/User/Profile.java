@@ -1,18 +1,23 @@
 package com.example.moderndaypharmacy.User;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,10 +29,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
+
+import static android.content.Intent.EXTRA_ALLOW_MULTIPLE;
 
 public class Profile extends Fragment {
     LinearLayout userInfo , LogOut ;
     UserInfoModel user;
+    ImageView image;
     public Profile() {
         // Required empty public constructor
     }
@@ -42,24 +51,7 @@ public class Profile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-                if(documentSnapshot == null){
-                  user = null;
-                }else {
-                    user = documentSnapshot.toObject(UserInfoModel.class);
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-                user = null;
-                Navigation.findNavController(getView()).navigate(ProfileDirections.actionProfile2ToUserInfo2(null));
-            }
-        });
+        final SharedPreference sharedPreference = new SharedPreference(getContext());
         LogOut = view.findViewById(R.id.LogOut);
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,11 +63,17 @@ public class Profile extends Fragment {
         userInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getView()).navigate(ProfileDirections.actionProfile2ToUserInfo2(user));
+                Navigation.findNavController(getView()).navigate(ProfileDirections.actionProfile2ToUserInfo2(sharedPreference.getUser()));
+
 
 
             }
         });
+        image = view.findViewById(R.id.imageView6);
+        if(user.getImage() != null){
+            Picasso.get().load(Uri.parse(user.getImage())).into(image);
+
+        }
     }
     public void displayAlert(){
 

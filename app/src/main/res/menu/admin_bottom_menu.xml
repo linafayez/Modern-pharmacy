@@ -15,7 +15,7 @@
         android:orderInCategory="2"
         android:title="Orders" />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/adminProfile"
         app:showAsAction="always"
         android:orderInCategory="3"
         android:icon="@drawable/ic_baseline_account_circle_24"

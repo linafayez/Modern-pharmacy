@@ -77,35 +77,23 @@ public void auth(){
     };
     thread.start();
 }
-    public void updateUI(@Nullable FirebaseUser user) {
+    public void update(@Nullable FirebaseUser user) {
         if(user != null){
             final SharedPreference sharedPreference = new SharedPreference(MainActivity.this);
-            FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    UserInfoModel userInfo = documentSnapshot.toObject(UserInfoModel.class);
-                    if(userInfo == null){
-                        //   Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(null));
-                    }else{
-                        sharedPreference.addUser(userInfo);
-                        Toast.makeText(MainActivity.this,userInfo.getType(),Toast.LENGTH_LONG).show();
+           UserInfoModel userInfo = sharedPreference.getUser();
+                    if(userInfo != null){
+                      //  sharedPreference.addUser(userInfo);
                         Intent done ;
                         if(userInfo.getType().equals("User")){
                             done = new Intent(MainActivity.this, MainPage.class);
                         }else {
-                            Toast.makeText(MainActivity.this,userInfo.getType(),Toast.LENGTH_LONG).show();
                             done = new Intent(MainActivity.this, AdminPanel.class);
                         }
                         startActivity(done);
                     }
                 }
-            });
-
-
-        }else{
-            //  auth();
         }
-    }
+
 
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -157,7 +145,7 @@ public void auth(){
         super.onRestart();
         // Check if user is signed in (non-null) and update UI accordingly.
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        updateUI(currentUser);
+        update(currentUser);
     }
 
 
@@ -165,6 +153,6 @@ public void auth(){
     protected void onStart() {
         super.onStart();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        updateUI(currentUser);
+        update(currentUser);
     }
 }

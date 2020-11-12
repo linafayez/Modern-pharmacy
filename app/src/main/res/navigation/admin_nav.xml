@@ -45,11 +45,6 @@
             app:destination="@id/products2" />
     </fragment>
     <fragment
-        android:id="@+id/profile"
-        android:name="com.example.moderndaypharmacy.User.Profile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
         android:id="@+id/ordersManagement"
         android:name="com.example.moderndaypharmacy.Admin.OrdersManagement"
         android:label="fragment_orders_management"
@@ -68,4 +63,31 @@
             android:id="@+id/action_products2_to_addProduct"
             app:destination="@id/addProduct" />
     </fragment>
+    <fragment
+        android:id="@+id/adminProfile"
+        android:name="com.example.moderndaypharmacy.Admin.AdminProfile"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" >
+        <action
+            android:id="@+id/action_adminProfile_to_userInfo5"
+            app:destination="@id/userInfo5" />
+        <action
+            android:id="@+id/action_adminProfile_to_allUsers"
+            app:destination="@id/allUsers" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfo5"
+        android:name="com.example.moderndaypharmacy.User.UserInfo"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" >
+        <argument
+            android:name="user"
+            app:argType="com.example.moderndaypharmacy.Models.UserInfoModel"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/allUsers"
+        android:name="com.example.moderndaypharmacy.Admin.allUsers"
+        android:label="fragment_all_users"
+        tools:layout="@layout/fragment_all_users" />
 </navigation>

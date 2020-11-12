@@ -127,12 +127,12 @@ public class SplashScreen extends Fragment {
                    Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(null));
                 }else{
                     sharedPreference.addUser(userInfo);
-                    Toast.makeText(getContext(),userInfo.getType(),Toast.LENGTH_LONG).show();
+
                     Intent done ;
                     if(userInfo.getType().equals("User")){
                          done = new Intent(getContext(), MainPage.class);
                     }else {
-                        Toast.makeText(getContext(),userInfo.getType(),Toast.LENGTH_LONG).show();
+
                          done = new Intent(getContext(), AdminPanel.class);
                     }
                     startActivity(done);

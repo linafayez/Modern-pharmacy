@@ -10,6 +10,7 @@ public class UserInfoModel implements Serializable {
     private String address;
     private String gender;
     private String email;
+    private String image;
 private String type;
 private int VirtualBalance;
     public UserInfoModel(){
@@ -86,5 +87,13 @@ private int VirtualBalance;
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

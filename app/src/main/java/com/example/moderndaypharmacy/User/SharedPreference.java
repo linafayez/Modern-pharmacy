@@ -32,7 +32,7 @@ public class SharedPreference {
         editorUser.apply();
     }
 
-    public static UserInfoModel getUser(){
+    public UserInfoModel getUser(){
         SharedPreferences settings;
         UserInfoModel user;
 
