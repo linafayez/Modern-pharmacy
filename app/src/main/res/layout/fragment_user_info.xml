@@ -51,34 +51,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Email"
+        app:helperText="user@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
+
+    <RadioGroup
         android:id="@+id/Gender"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Gender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+
+        <RadioButton
+            android:id="@+id/Male"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:text="Male"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="female" />
+    </RadioGroup>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone"
         android:layout_width="300dp"
@@ -87,10 +101,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:counterMaxLength="10"
         app:layout_constraintTop_toBottomOf="@+id/Gender">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Address"

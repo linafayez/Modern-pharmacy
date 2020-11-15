@@ -20,6 +20,7 @@ import com.example.moderndaypharmacy.R;
 
 public class HomePage extends Fragment {
     LinearLayout product;
+    CardView search;
     public HomePage() {
         // Required empty public constructor
     }
@@ -41,6 +42,13 @@ public class HomePage extends Fragment {
               Navigation.findNavController(getView()).navigate(R.id.action_homePage_to_products);
           }
       });
+        search = view.findViewById(R.id.s);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_homePage_to_search2);
+            }
+        });
 
     }
 }

@@ -26,10 +26,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moderndaypharmacy.Models.CategoryModel;
+import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -176,7 +180,7 @@ public class AddCategory extends Fragment {
                 });
     }
     public void displayAlert(){
-
+        final WriteBatch batch = db.batch();
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Category")
                 .setMessage("Are you sure to delete this Category?")
@@ -185,10 +189,27 @@ public class AddCategory extends Fragment {
                         db.collection("Category").document(uniqueID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(getActivity(),"deleted",Toast.LENGTH_SHORT).show();
-                                Navigation.findNavController(getView()).navigateUp();
+                               db.collection("Products").whereEqualTo("category_id",uniqueID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        for (int i=0;i<queryDocumentSnapshots.size();i++) {
+                                            ProductModel productsModel = queryDocumentSnapshots.getDocuments().get(i).toObject(ProductModel.class);
+                                            DocumentReference documentRef = db.collection("Products").document(productsModel.getID());
+                                            batch.delete(documentRef);
+
+                                        }
+                                        batch.commit().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+
+                                                Toast.makeText(getActivity(),"done deleted all products in this category ",Toast.LENGTH_SHORT).show();
+                                               // Navigation.findNavController(getView()).navigateUp();
+                                                Navigation.findNavController(getView()).navigateUp();
+                                              } });
+                                    } });
                             }
                         });
+
 
                     }
                 }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {

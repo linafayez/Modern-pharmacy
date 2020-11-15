@@ -19,8 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moderndaypharmacy.BuildConfig;
 import com.example.moderndaypharmacy.MainActivity;
 import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.example.moderndaypharmacy.R;
@@ -29,14 +31,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import static android.content.Intent.EXTRA_ALLOW_MULTIPLE;
 
 public class Profile extends Fragment {
-    LinearLayout userInfo , LogOut ;
+    LinearLayout userInfo , LogOut , shareApp ;
     UserInfoModel user;
     ImageView image;
+    TextView VirtualBalance , point , orders;
     public Profile() {
         // Required empty public constructor
     }
@@ -52,7 +56,11 @@ public class Profile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final SharedPreference sharedPreference = new SharedPreference(getContext());
+        VirtualBalance = view.findViewById(R.id.VirtualBalance);
+        point= view.findViewById(R.id.point);
+        orders = view.findViewById(R.id.AllOrder);
         LogOut = view.findViewById(R.id.LogOut);
+        shareApp = view.findViewById(R.id.Invite);
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +76,31 @@ public class Profile extends Fragment {
 
 
 
+            }
+        });
+        FirebaseFirestore.getInstance().collection("Orders").whereEqualTo("userId",user.getId()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+             orders.setText(""+queryDocumentSnapshots.size());
+            }
+        });
+        point.setText(user.getPoints()+"");
+        VirtualBalance.setText(""+user.getVirtualBalance());
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Modern Pharmacy");
+                    String shareMessage= "\nInstall this cool application:\n\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
             }
         });
         image = view.findViewById(R.id.imageView6);

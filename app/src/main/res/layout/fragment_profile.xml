@@ -77,7 +77,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/newOrder"
+                            android:id="@+id/VirtualBalance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="2"
@@ -104,7 +104,7 @@
                         android:weightSum="2">
 
                         <TextView
-                            android:id="@+id/textView6"
+                            android:id="@+id/point"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -136,7 +136,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="2"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textSize="20dp"
                             android:textStyle="bold" />

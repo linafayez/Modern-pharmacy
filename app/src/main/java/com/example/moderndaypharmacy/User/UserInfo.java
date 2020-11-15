@@ -12,11 +12,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.moderndaypharmacy.Models.UserInfoModel;
@@ -34,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Intent.EXTRA_ALLOW_MULTIPLE;
 
 public class UserInfo extends Fragment {
-    TextInputLayout name,email,phone , Gender , Address;
+    TextInputLayout name,email,phone  , Address;
     Button submit;
     UserInfoModel user;
     FirebaseFirestore db;
@@ -42,6 +47,7 @@ public class UserInfo extends Fragment {
     StorageReference mStorageRef;
     ImageView imageView;
      Uri ImageUri;
+     RadioGroup radioGroup;
 
     public UserInfo() {
         // Required empty public constructor
@@ -57,11 +63,33 @@ public class UserInfo extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         name = view.findViewById(R.id.name);
-        Gender = view.findViewById(R.id.Gender);
+//        Gender = view.findViewById(R.id.Gender);
         Address = view.findViewById(R.id.Address);
+        radioGroup = view.findViewById(R.id.Gender);
         db = FirebaseFirestore.getInstance();
         email = view.findViewById(R.id.email);
         phone = view.findViewById(R.id.phone);
+        phone.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (s.length() != 10)
+//                    phone.setError("The phone number length must be equal ten");
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() != 10)
+                    phone.setError("The phone number length must be equal 10");
+
+            }
+        });
         submit= view.findViewById(R.id.Update);
 imageView = view.findViewById(R.id.imageView6);
 imageView.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +115,9 @@ final SharedPreference sharedPreference = new SharedPreference(getContext());
             name.getEditText().setText(user.getName());
             email.getEditText().setText(user.getEmail());
             phone.getEditText().setText(user.getPhoneNumber());
-            Gender.getEditText().setText(user.getGender());
+          //  Gender.getEditText().setText(user.getGender());
+            if(user.getGender().equals("female"))
+                radioGroup.check(R.id.female);
             Address.getEditText().setText(user.getAddress());
             if(user.getImage() != null){
                 Picasso.get().load(Uri.parse(user.getImage())).into(imageView);
@@ -100,13 +130,18 @@ final SharedPreference sharedPreference = new SharedPreference(getContext());
             user.setType("User");
         }
 
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     user.setName(name.getEditText().getText().toString());
                     user.setPhoneNumber(phone.getEditText().getText().toString());
                     user.setEmail(email.getEditText().getText().toString());
-                    user.setGender(Gender.getEditText().getText().toString());
+                    if(radioGroup.getCheckedRadioButtonId() == R.id.female) {
+                        user.setGender("female");
+                    }else{
+                        user.setGender("Male");
+                    }
                     user.setAddress(Address.getEditText().getText().toString());
                     db.collection("Users").document(UID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

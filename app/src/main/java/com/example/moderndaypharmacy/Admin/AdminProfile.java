@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.moderndaypharmacy.BuildConfig;
 import com.example.moderndaypharmacy.MainActivity;
 import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.example.moderndaypharmacy.R;
@@ -66,6 +67,23 @@ public class AdminProfile extends Fragment {
             Picasso.get().load(Uri.parse(user.getImage())).into(image);
 
         }
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Modern Pharmacy");
+                    String shareMessage= "\nInstall this cool application:\n\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+            }
+        });
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

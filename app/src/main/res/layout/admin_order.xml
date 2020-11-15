@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="7dp"
-    android:layout_height="250dp">
+    app:cardCornerRadius="25dp"
+    android:clipToPadding="false"
+    android:layout_height="230dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -127,6 +129,7 @@
                     android:id="@+id/productList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="14dp"
                     android:text="l;kj"
                     tools:layout_editor_absoluteX="7dp"
                     tools:layout_editor_absoluteY="97dp" />

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homePage_to_products"
             app:destination="@id/products" />
+        <action
+            android:id="@+id/action_homePage_to_search2"
+            app:destination="@id/search2" />
     </fragment>
     <fragment
         android:id="@+id/products"
@@ -71,4 +74,9 @@
             android:name="order"
             app:argType="com.example.moderndaypharmacy.Models.OrderModel" />
     </fragment>
+    <fragment
+        android:id="@+id/search2"
+        android:name="com.example.moderndaypharmacy.User.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>
