@@ -53,4 +53,22 @@
             app:argType="com.example.moderndaypharmacy.Models.UserInfoModel"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/userOrder"
+        android:name="com.example.moderndaypharmacy.User.UserOrder"
+        android:label="fragment_user_order"
+        tools:layout="@layout/fragment_user_order" >
+        <action
+            android:id="@+id/action_userOrder_to_feedback"
+            app:destination="@id/feedback" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedback"
+        android:name="com.example.moderndaypharmacy.User.feedback"
+        android:label="fragment_feedback"
+        tools:layout="@layout/fragment_feedback" >
+        <argument
+            android:name="order"
+            app:argType="com.example.moderndaypharmacy.Models.OrderModel" />
+    </fragment>
 </navigation>

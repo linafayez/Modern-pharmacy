@@ -1,8 +1,10 @@
 package com.example.moderndaypharmacy.Admin;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;  
@@ -127,6 +129,7 @@ public class AddProduct extends Fragment {
 
 
         }
+
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,6 +152,13 @@ public class AddProduct extends Fragment {
                 UploadProduct.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
                 UploadProduct();
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayAlert();
+
             }
         });
         UploadImage.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +262,29 @@ public class AddProduct extends Fragment {
         }
 
 
+    }
+    private void displayAlert() {
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Product")
+                .setMessage("Are you sure to delete this Product?")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        db.collection("Products").document(uniqueID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getContext(),"deleted",Toast.LENGTH_SHORT).show();
+                                Navigation.findNavController(getView()).navigateUp();
+                            }
+                        });
+
+                    }
+                }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        })
+                .show();
     }
     public void UploadImage(){
         for( uploadCont = 0;uploadCont<mArrayUri.size();++uploadCont){

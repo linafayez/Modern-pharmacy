@@ -1,15 +1,19 @@
 package com.example.moderndaypharmacy.Models;
 
 import com.google.firebase.Timestamp;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class OrderModel {
+public class OrderModel implements Serializable {
     private String id;
     private String userId;
     private ArrayList<ProductModel> productList;
     private Timestamp time;
     private String orderState;
     private double total;
+    private String note;
+    private FeedbackModel feedbackModel;
 
     public OrderModel(String id, String userId, ArrayList<ProductModel> productList, Timestamp time, String orderState, double total) {
         this.id = id;
@@ -19,9 +23,8 @@ public class OrderModel {
         this.orderState = orderState;
         this.total = total;
     }
-public OrderModel(){
-
-}
+   public OrderModel(){
+   }
     public ArrayList<ProductModel> getProductList() {
         return productList;
     }
@@ -68,5 +71,21 @@ public OrderModel(){
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public FeedbackModel getFeedbackModel() {
+        return feedbackModel;
+    }
+
+    public void setFeedbackModel(FeedbackModel feedbackModel) {
+        this.feedbackModel = feedbackModel;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

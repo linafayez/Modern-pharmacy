@@ -60,10 +60,11 @@ public class Profile extends Fragment {
             }
         });
         userInfo = view.findViewById(R.id.userInfo);
+        user = sharedPreference.getUser();
         userInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getView()).navigate(ProfileDirections.actionProfile2ToUserInfo2(sharedPreference.getUser()));
+                Navigation.findNavController(getView()).navigate(ProfileDirections.actionProfile2ToUserInfo2(user));
 
 
 
