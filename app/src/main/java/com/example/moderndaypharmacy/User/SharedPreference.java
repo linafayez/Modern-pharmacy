@@ -24,7 +24,6 @@ public class SharedPreference {
         user = context.getSharedPreferences("User",
                 Context.MODE_PRIVATE);
         editorUser = user.edit();
-
         Gson gson = new Gson();
         String userString = gson.toJson(userObject);
         editorUser.putString("user", userString);
@@ -83,6 +82,22 @@ public class SharedPreference {
             Toast.makeText(context,"from past",Toast.LENGTH_LONG).show();
         }
         SaveCart( productModelList);
+    }
+    public ArrayList<ProductModel> deleteProduct(ProductModel product){
+        ArrayList<ProductModel> productModelList = getCartData();
+        ArrayList<ProductModel> productModels = new ArrayList<>();
+        if (productModelList == null ) {
+            productModelList = new ArrayList<ProductModel>();
+        }else{
+            for (int i=0;i<productModelList.size();i++){
+                if(!productModelList.get(i).getID().equals(product.getID())){
+                    productModels.add(productModelList.get(i));
+                }
+            }
+
+        }
+        SaveCart( productModelList);
+        return productModels;
     }
 
 

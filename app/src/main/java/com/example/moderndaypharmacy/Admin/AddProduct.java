@@ -165,7 +165,7 @@ public class AddProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 UploadImage();
-                UploadProduct.setVisibility(View.VISIBLE);
+
             }
         });
         switchImage.setOnTouchListener(new View.OnTouchListener() {
@@ -303,6 +303,7 @@ public class AddProduct extends Fragment {
 
                         }
                     });
+                    UploadProduct.setVisibility(View.VISIBLE);
                 }
             });
         }

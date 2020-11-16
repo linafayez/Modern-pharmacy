@@ -162,25 +162,6 @@ public class feedback extends Fragment {
             System.out.println(""+feeds.size());
             feedbackModel.setModels(feeds);
             System.out.println(""+feeds.get(0).getNote());
-            //  Toast.makeText(feedback.this,feeds.size()+"",Toast.LENGTH_LONG).show();
-//
-//         ArrayList<String> notes ;
-//         if(product. == null) {
-//             notes =new ArrayList<>();
-//         }else {
-//             notes = product.getNote();
-//         }
-//            notes.add(note);
-//            product.setRating(rating);
-//            product.setNote(notes);
-////            FirebaseFirestore.getInstance().collection("Products").document(pro.getID()).set(pro).addOnSuccessListener(new OnSuccessListener<Void>() {
-////                @Override
-////                public void onSuccess(Void aVoid) {
-////                    models.add(pro);
-////                }
-////            });
-//            data.set(position,product);
-//          //  orderModel.setProductsModels(data);
             if(models.size()>0){
                 // product.setRating((product.getRating()+rating)/2);
                 for (int i = 0; i < models.size(); i++) {

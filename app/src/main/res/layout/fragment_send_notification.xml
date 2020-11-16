@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.sendNotification">
+
+    <EditText
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/edit_text"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="text"
+        android:numeric="integer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:padding="7dp"
+        android:text="Send Notification"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/Text"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/edit_text"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Text"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:background="@drawable/button"
+        android:text="Send"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

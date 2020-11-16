@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_adminProfile_to_allUsers"
             app:destination="@id/allUsers" />
+        <action
+            android:id="@+id/action_adminProfile_to_sendNotification2"
+            app:destination="@id/sendNotification2" />
     </fragment>
     <fragment
         android:id="@+id/userInfo5"
@@ -90,4 +93,9 @@
         android:name="com.example.moderndaypharmacy.Admin.allUsers"
         android:label="fragment_all_users"
         tools:layout="@layout/fragment_all_users" />
+    <fragment
+        android:id="@+id/sendNotification2"
+        android:name="com.example.moderndaypharmacy.Admin.sendNotification"
+        android:label="fragment_send_notification"
+        tools:layout="@layout/fragment_send_notification" />
 </navigation>

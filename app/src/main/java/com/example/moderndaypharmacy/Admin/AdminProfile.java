@@ -48,6 +48,13 @@ public class AdminProfile extends Fragment {
         adminInfo = view.findViewById(R.id.adminInfo);
         LogOut = view.findViewById(R.id.LogOut);
         allUser = view.findViewById(R.id.allUser);
+        sendNotification = view.findViewById(R.id.sendNotification);
+        sendNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_adminProfile_to_sendNotification2);
+            }
+        });
         shareApp = view.findViewById(R.id.Invite);
         allUser.setOnClickListener(new View.OnClickListener() {
             @Override
