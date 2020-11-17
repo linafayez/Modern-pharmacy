@@ -2,13 +2,15 @@ package com.example.moderndaypharmacy.Models;
 
 import com.google.firebase.Timestamp;
 
-public class PromoCodeModel {
+import java.io.Serializable;
+
+public class PromoCodeModel implements Serializable {
     private String Id;
     private Timestamp time;
     private Timestamp EndTime;
     private String code;
     private int discount;
-
+    public PromoCodeModel(){}
     public PromoCodeModel(String id, Timestamp time, Timestamp endTime, String code, int discount) {
         Id = id;
         this.time = time;

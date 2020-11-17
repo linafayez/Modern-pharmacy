@@ -106,7 +106,7 @@
                 android:layout_margin="7dp"
                 android:background="@drawable/edit_text"
                 android:hint="Number of item"
-                android:inputType="text" />
+                android:inputType="number" />
 
             <Button
                 android:id="@+id/AddImage"

@@ -69,9 +69,10 @@ Button newProduct,newCategory, editCategory , newPromoCode , editProduct;
         newPromoCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getView()).navigate(R.id.addPromoCode);
+                Navigation.findNavController(getView()).navigate(R.id.action_adminHomePage_to_allPromoCode);
             }
         });
+
 
     }
 }
