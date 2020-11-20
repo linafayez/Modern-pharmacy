@@ -21,8 +21,7 @@ public class SharedPreference {
     public static void addUser(UserInfoModel userObject){
         SharedPreferences user;
         SharedPreferences.Editor editorUser;
-        user = context.getSharedPreferences("User",
-                Context.MODE_PRIVATE);
+        user = context.getSharedPreferences("User", Context.MODE_PRIVATE);
         editorUser = user.edit();
         Gson gson = new Gson();
         String userString = gson.toJson(userObject);

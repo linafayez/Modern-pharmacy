@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class AdminProfile extends Fragment {
-    LinearLayout adminInfo , LogOut , sendNotification , changePassword,allUser , shareApp;
+    LinearLayout adminInfo , LogOut , sendNotification ,allUser , shareApp;
     UserInfoModel user;
     ImageView image;
     public AdminProfile() {

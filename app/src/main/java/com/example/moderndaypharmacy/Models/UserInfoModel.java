@@ -11,6 +11,7 @@ public class UserInfoModel implements Serializable {
     private String gender;
     private String email;
     private String image;
+    //user or admin
 private String type;
 private int VirtualBalance;
     public UserInfoModel(){
