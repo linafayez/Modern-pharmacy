@@ -104,6 +104,7 @@ Button checkout;
 
     }
 
+
     public static class changed {
         public static void total(double t) {
             double price = Double.parseDouble(total.getText().toString().split("JD")[0]);
@@ -116,3 +117,4 @@ Button checkout;
     }
 
 }
+
