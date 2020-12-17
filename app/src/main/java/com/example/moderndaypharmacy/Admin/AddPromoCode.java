@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moderndaypharmacy.Models.PromoCodeModel;
@@ -32,6 +33,7 @@ public class AddPromoCode extends Fragment {
     ImageView delete;
     FirebaseFirestore db ;
     PromoCodeModel promoCodeModel;
+    TextView label;
     public AddPromoCode() {
         // Required empty public constructor
     }
@@ -47,6 +49,7 @@ public class AddPromoCode extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         db = FirebaseFirestore.getInstance();
+        label = view.findViewById(R.id.textView3);
         delete = view.findViewById(R.id.delete);
         PromoCode = view.findViewById(R.id.voucher);
         EndAfter = view.findViewById(R.id.EndDate);
@@ -61,6 +64,8 @@ public class AddPromoCode extends Fragment {
             PromoCode.getEditText().setText(promoCodeModel.getCode());
             EndAfter.getEditText().setText(promoCodeModel.getEndTime().toDate().getDay()-promoCodeModel.getTime().toDate().getDay()+"");
             Discount.getEditText().setText(promoCodeModel.getDiscount()+"");
+            label.setText("Edit Promo Code");
+            Add.setText("Change");
         }
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
