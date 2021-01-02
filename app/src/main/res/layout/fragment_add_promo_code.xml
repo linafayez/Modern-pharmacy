@@ -81,8 +81,7 @@
             android:layout_height="0dp"
             android:layout_margin="7dp"
             android:layout_weight="1"
-            android:hint="Discount"
-            app:suffixText="%">
+            android:hint="Discount">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -97,7 +96,7 @@
             android:layout_margin="7dp"
             android:layout_weight="1"
             android:hint="EndAfter"
-            app:suffixText="Days">
+           >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

@@ -64,6 +64,7 @@ public class Products extends Fragment {
             protected void onBindViewHolder(@NonNull ProductHolder holder, int position, @NonNull ProductModel model) {
                      holder.name.setText(model.getName());
                     holder.price.setText(""+model.getPrice()/100);
+                    if(model !=null && model.getPic()!= null)
                     Picasso.get().load(Uri.parse(model.getPic().get(0))).into(holder.image);
             }
         };

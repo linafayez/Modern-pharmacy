@@ -110,7 +110,7 @@ public class Checkout extends Fragment {
         @Override
         public void onClick(View v) {
 
-       Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_mapsFragment);
+       Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_mapFragment);
         }
       });
 
