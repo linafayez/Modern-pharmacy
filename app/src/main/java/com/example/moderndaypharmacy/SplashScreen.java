@@ -127,7 +127,6 @@ public class SplashScreen extends Fragment {
                    Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(null));
                 }else{
                     sharedPreference.addUser(userInfo);
-
                     Intent done ;
                     if(userInfo.getType().equals("User")){
                          done = new Intent(getContext(), MainPage.class);

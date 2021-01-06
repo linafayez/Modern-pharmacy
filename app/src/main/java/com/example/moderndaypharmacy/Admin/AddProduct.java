@@ -121,6 +121,7 @@ public class AddProduct extends Fragment {
             itemNumber.setText(product.getItemNumber()+"");
             listImage = product.getPic();
             itemNumber.setText("" + product.getItemNumber());
+            if(product.getPic()!= null)
             for (int i = 0; i < product.getPic().size(); i++) {
                 mArrayUri.add(Uri.parse(product.getPic().get(i)));
             }
