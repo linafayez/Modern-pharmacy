@@ -42,6 +42,7 @@ public class Checkout extends Fragment {
     TickerView tickerView;
     Button addAdders, Order, ApplyVoucher;
     Date date;
+
     double latitude;
     String  uniqueID;
     double longitude;
