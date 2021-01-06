@@ -110,15 +110,16 @@ imageView.setOnClickListener(new View.OnClickListener() {
 final SharedPreference sharedPreference = new SharedPreference(getContext());
         mStorageRef = FirebaseStorage.getInstance().getReference("Users");
         user = UserInfoArgs.fromBundle(getArguments()).getUser();
-        if(user !=null) {
+        if(user !=null && user.getName()!=null) {
             UID = user.getId();
-            name.getEditText().setText(user.getName());
-            email.getEditText().setText(user.getEmail());
-            phone.getEditText().setText(user.getPhoneNumber());
+
+            if(user.getName()!=null)name.getEditText().setText(user.getName());
+            if(user.getEmail()!=null)email.getEditText().setText(user.getEmail());
+            if(user.getPhoneNumber()!=null)phone.getEditText().setText(user.getPhoneNumber());
           //  Gender.getEditText().setText(user.getGender());
-            if(user.getGender().equals("female"))
+            if(user.getGender()!= null && user.getGender().equals("female"))
                 radioGroup.check(R.id.female);
-            Address.getEditText().setText(user.getAddress());
+            if(user.getAddress()!=null)Address.getEditText().setText(user.getAddress());
             if(user.getImage() != null){
                 Picasso.get().load(Uri.parse(user.getImage())).into(imageView);
 
