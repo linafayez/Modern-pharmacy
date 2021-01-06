@@ -145,4 +145,10 @@ public class SplashScreen extends Fragment {
               auth();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI(FirebaseAuth.getInstance().getCurrentUser());
+    }
 }

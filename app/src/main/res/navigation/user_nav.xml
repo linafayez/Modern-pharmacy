@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homePage_to_query"
             app:destination="@id/query" />
+        <action
+            android:id="@+id/action_homePage_to_product_view"
+            app:destination="@id/product_view" />
     </fragment>
     <fragment
         android:id="@+id/products"
@@ -121,7 +124,11 @@
         android:id="@+id/search2"
         android:name="com.example.moderndaypharmacy.User.Search"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search2_to_product_view"
+            app:destination="@id/product_view" />
+    </fragment>
 
     <fragment
         android:id="@+id/query"
