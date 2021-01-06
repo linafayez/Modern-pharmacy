@@ -1,9 +1,9 @@
 package com.example.moderndaypharmacy.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class ProductModel {
+public class ProductModel implements Serializable {
     private String name;
     private int price;
     private String desc;
@@ -15,7 +15,6 @@ public class ProductModel {
     private String category_id ;
     private float rating;
     private ArrayList<String> note;
-
 
      public ProductModel(){
          setItemNumberInCart(0);

@@ -2,6 +2,12 @@ package com.example.moderndaypharmacy.User;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,13 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
@@ -64,6 +63,8 @@ public class Products extends Fragment {
             protected void onBindViewHolder(@NonNull ProductHolder holder, int position, @NonNull ProductModel model) {
                      holder.name.setText(model.getName());
                     holder.price.setText(""+model.getPrice()/100);
+               // if(model.getProductList() != null && model.getProductList().size()!= 0 && model.getProductList().get(0).getPic().get(0)!= null )
+                    if (model !=null&&model.getPic()!=null)
                     Picasso.get().load(Uri.parse(model.getPic().get(0))).into(holder.image);
             }
         };
@@ -116,6 +117,12 @@ Button addToCart;
                     }
                 }
             });
+            image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Navigation.findNavController(getView()).navigate(ProductsDirections.actionProductsToProductView(response.getSnapshots().get(getAdapterPosition())));
+                    }
+                });
 
 
         }

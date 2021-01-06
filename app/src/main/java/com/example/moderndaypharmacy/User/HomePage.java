@@ -1,6 +1,10 @@
 package com.example.moderndaypharmacy.User;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,18 +12,10 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.moderndaypharmacy.R;
 
 public class HomePage extends Fragment {
-    LinearLayout product;
+    LinearLayout product,query;
     CardView search;
     public HomePage() {
         // Required empty public constructor
@@ -49,6 +45,22 @@ public class HomePage extends Fragment {
                 Navigation.findNavController(getView()).navigate(R.id.action_homePage_to_search2);
             }
         });
+        query=view.findViewById(R.id.query);
+
+        final Bundle bundle = new Bundle();
+        bundle.putString("newQ","new");
+        View.OnClickListener q= Navigation.createNavigateOnClickListener(R.id.action_homePage_to_query,bundle);
+        query.setOnClickListener(q);
+     /*
+        query=view.findViewById(R.id.query);
+        query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_homePage_to_query);
+            }
+        });
+*/
+
 
     }
 }

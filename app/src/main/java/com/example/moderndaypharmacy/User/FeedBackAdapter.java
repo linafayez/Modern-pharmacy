@@ -64,6 +64,8 @@ static String UID;
                     if (OrderModel.getFeedbackModel().getModels().get(position).getNote() != null) {
                         holder.note.getEditText().setText(OrderModel.getFeedbackModel().getModels().get(position).getNote());
                     }
+
+
                 }
 
             }

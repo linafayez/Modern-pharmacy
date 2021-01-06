@@ -16,12 +16,31 @@
         <action
             android:id="@+id/action_homePage_to_search2"
             app:destination="@id/search2" />
+        <action
+            android:id="@+id/action_homePage_to_query"
+            app:destination="@id/query" />
     </fragment>
     <fragment
         android:id="@+id/products"
         android:name="com.example.moderndaypharmacy.User.Products"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products">
+        <action
+        android:id="@+id/action_products_to_product_view"
+        app:destination="@id/product_view"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/product_view"
+        android:name="com.example.moderndaypharmacy.User.ProductView"
+        android:label="fragment_product_view"
+        tools:layout="@layout/fragment_product_view">
+        <argument
+            android:name="product"
+            app:argType="com.example.moderndaypharmacy.Models.ProductModel"
+            />
+    </fragment>
+
     <fragment
         android:id="@+id/cart"
         android:name="com.example.moderndaypharmacy.User.Cart"
@@ -64,6 +83,23 @@
         <action
             android:id="@+id/action_userOrder_to_feedback"
             app:destination="@id/feedback" />
+        <action
+            android:id="@+id/action_userOrder_to_orders"
+            app:destination="@id/orders" />
+    </fragment>
+    <fragment
+        android:id="@+id/orders"
+        android:name="com.example.moderndaypharmacy.User.Orders"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" >
+        <action
+            android:id="@+id/action_orders_to_feedback"
+            app:destination="@id/feedback" />
+        <argument
+            android:name="youOrder"
+            app:argType="com.example.moderndaypharmacy.Models.OrderModel"
+            />
+
     </fragment>
     <fragment
         android:id="@+id/feedback"
@@ -79,4 +115,10 @@
         android:name="com.example.moderndaypharmacy.User.Search"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/query"
+        android:name="com.example.moderndaypharmacy.User.Queries"
+        android:label="fragment_query"
+        tools:layout="@layout/fragment_query"/>
+
 </navigation>

@@ -2,6 +2,12 @@ package com.example.moderndaypharmacy.User;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,12 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.moderndaypharmacy.Models.OrderModel;
 import com.example.moderndaypharmacy.R;
@@ -65,7 +65,8 @@ RecyclerView order;
             protected void onBindViewHolder(@NonNull OrderViewHolder holder, int position, @NonNull OrderModel model) {
                 holder.total.setText(model.getTotal()+"JD");
                holder.state.setText(model.getOrderState());
-                Picasso.get().load(Uri.parse(model.getProductList().get(0).getPic().get(0))).into(holder.image);
+               if(model.getProductList() != null && model.getProductList().size()!= 0 && model.getProductList().get(0).getPic().get(0)!= null )
+               Picasso.get().load(Uri.parse(model.getProductList().get(0).getPic().get(0))).into(holder.image);
 //                holder.Date.setText(model.getTime().toDate()+"");
                 //   holder.Items.setText(TextViewUtil.ItemsName(model.getProductsModels()));
             }
@@ -93,6 +94,7 @@ RecyclerView order;
         TextView Date, Items , total , state;
         ImageView image;
         ArrayList products;
+        Button userOrder;
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
 //            Date = itemView.findViewById(R.id.time);
@@ -100,12 +102,20 @@ RecyclerView order;
             total = itemView.findViewById(R.id.textView12);
             state= itemView.findViewById(R.id.OrderState);
             image= itemView.findViewById(R.id.imageView5);
+            userOrder=itemView.findViewById(R.id.order);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Navigation.findNavController(getView()).navigate(UserOrderDirections.actionUserOrderToFeedback(options.getSnapshots().get(getAdapterPosition())));
                 }
             });
+            userOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(getView()).navigate(UserOrderDirections.actionUserOrderToOrders(options.getSnapshots().get(getAdapterPosition())));
+                }
+            });
+
         }
     }
 

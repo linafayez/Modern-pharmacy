@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="7dp"
+        android:padding="7dp"
+        android:text="Orders Id"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <TextView
+        android:id="@+id/userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="@+id/id"
+        android:layout_margin="7dp"
+        android:paddingLeft="25dp"
+        android:text="User Id"
+        android:textSize="15dp"
+        android:textStyle="bold"
+
+
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/userId"
+        android:layout_margin="7dp"
+        android:layout_toStartOf="@+id/total"
+        android:gravity="center"
+        android:text="Total :"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="195dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_below="@+id/userId"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="7dp"
+        android:gravity="center"
+        android:text="15JD"
+        android:textColor="#e80505"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="20dp"
+        android:text="Order State"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="168dp" />
+
+    <TextView
+        android:id="@+id/OrderState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:text="Request"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="281dp"
+        tools:layout_editor_absoluteY="168dp" />
+    <TextView
+        android:textSize="18dp"
+        android:id="@+id/productList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:text="l;kj"
+        android:layout_toLeftOf="@+id/total"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="97dp" />
+</RelativeLayout>

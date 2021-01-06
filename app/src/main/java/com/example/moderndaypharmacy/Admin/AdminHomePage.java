@@ -1,25 +1,25 @@
 package com.example.moderndaypharmacy.Admin;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import com.example.moderndaypharmacy.Models.PromoCodeModel;
 import com.example.moderndaypharmacy.R;
-
-import java.util.Objects;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class AdminHomePage extends Fragment {
-Button newProduct,newCategory, editCategory , newPromoCode , editProduct;
+Button newProduct,newCategory, editCategory , newPromoCode , editProduct,newAds,manageQueries,editAds;
+    FirestoreRecyclerAdapter adapter;
+    FirestoreRecyclerOptions<PromoCodeModel> response;
     public AdminHomePage() {
         // Required empty public constructor
     }
@@ -39,6 +39,36 @@ Button newProduct,newCategory, editCategory , newPromoCode , editProduct;
         newPromoCode = view.findViewById(R.id.promoCode);
         newCategory= view.findViewById(R.id.newCategory);
         editCategory = view.findViewById(R.id.editCategory);
+        newAds=view.findViewById(R.id.newAds);
+        manageQueries=view.findViewById(R.id.manageQueries);
+        editAds=view.findViewById(R.id.editAds);
+
+        final Bundle bundle4 = new Bundle();
+        newAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bundle4.putString("type","newAds");
+                Navigation.findNavController(getView()).navigate(R.id.action_adminHomePage_to_allProducts,bundle4);
+            }
+        });
+        final Bundle bundle1 = new Bundle();
+        editAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bundle1.putString("type","editAds");
+                Navigation.findNavController(getView()).navigate(R.id.action_adminHomePage_to_ads,bundle1);
+            }
+        });
+
+        manageQueries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.action_adminHomePage_to_manageQueries);
+
+            }
+        });
+
+
         final Bundle bundle = new Bundle();
         newProduct.setOnClickListener(new View.OnClickListener() {
             @Override
