@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
+import com.example.moderndaypharmacy.Util.TextViewUtil;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Cart extends Fragment {
@@ -44,6 +46,7 @@ Button checkout;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        DecimalFormat df2 = new DecimalFormat("#.##");
         total = view.findViewById(R.id.total);
         checkout = view.findViewById(R.id.checkout);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -68,7 +71,7 @@ Button checkout;
                 sum += price * number;
             }
         }
-        total.setText(sum + "JD");
+        total.setText(df2.format(sum) + "JD");
         adapter = new CartAdapter(data);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(false);
