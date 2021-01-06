@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="20dp"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        app:cardCornerRadius="25dp"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="15dp"
+                android:textSize="20sp"
+                android:background="@drawable/text_view"
+                android:layout_alignParentTop="true"
+                />
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="45dp"
+                android:background="@drawable/edit_text"
+                android:ems="10"
+                android:hint="Type reply"
+                android:inputType="textMultiLine" />
+
+
+            <ImageView
+                android:id="@+id/post"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/text"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_send_replies_24" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

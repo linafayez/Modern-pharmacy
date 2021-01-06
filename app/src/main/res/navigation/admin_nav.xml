@@ -21,7 +21,60 @@
         <action
             android:id="@+id/action_adminHomePage_to_allPromoCode"
             app:destination="@id/allPromoCode" />
+        <action
+            android:id="@+id/action_adminHomePage_to_addAds"
+            app:destination="@id/addAds" />
+        <action
+            android:id="@+id/action_adminHomePage_to_ads"
+            app:destination="@id/ads" />
+        <action
+            android:id="@+id/action_adminHomePage_to_manageQueries"
+            app:destination="@id/manageQueries" />
+        <action
+            android:id="@+id/action_adminHomePage_to_allProducts"
+            app:destination="@id/allProducts" />
+
+
     </fragment>
+    <fragment
+        android:id="@+id/manageQueries"
+        android:name="com.example.moderndaypharmacy.Admin.ManageQueries"
+        android:label="fragment_manage_queries"
+        tools:layout="@layout/fragment_manage_queries" />
+    <fragment
+        android:id="@+id/addAds"
+        android:name="com.example.moderndaypharmacy.Admin.AddAds"
+        android:label="fragment_add_ads"
+        tools:layout="@layout/fragment_add_ads" />
+    <fragment
+        android:id="@+id/ads"
+        android:name="com.example.moderndaypharmacy.Admin.Ads"
+        android:label="fragment_ads"
+        tools:layout="@layout/fragment_ads" >
+        <action
+            android:id="@+id/action_ads_to_allProducts"
+            app:destination="@+id/allProducts"/>
+        <action
+            android:id="@+id/action_ads_to_addAds"
+            app:destination="@+id/addAds"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/allProducts"
+        android:name="com.example.moderndaypharmacy.Admin.AllProducts"
+        android:label="fragment_all_products"
+        tools:layout="@layout/fragment_all_products">
+
+        <action
+            android:id="@+id/action_allProducts_to_addAds"
+            app:destination="@+id/addAds"/>
+        <action
+            android:id="@+id/action_allProducts_to_ads"
+            app:destination="@+id/ads"/>
+
+    </fragment>
+
+
     <fragment
         android:id="@+id/addProduct"
         android:name="com.example.moderndaypharmacy.Admin.AddProduct"
@@ -51,7 +104,23 @@
         android:id="@+id/ordersManagement"
         android:name="com.example.moderndaypharmacy.Admin.OrdersManagement"
         android:label="fragment_orders_management"
-        tools:layout="@layout/fragment_orders_management" />
+        tools:layout="@layout/fragment_orders_management" >
+        <action
+            android:id="@+id/action_ordersManagement_to_orderProcess"
+            app:destination="@id/orderProcess" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderProcess"
+        android:name="com.example.moderndaypharmacy.Admin.OrderProcess"
+        android:label="fragment_order_process"
+        tools:layout="@layout/fragment_order_process" >
+        <argument
+            android:name="order"
+            app:argType="com.example.moderndaypharmacy.Models.OrderModel"
+            />
+    </fragment>
     <fragment
         android:id="@+id/addPromoCode"
         android:name="com.example.moderndaypharmacy.Admin.AddPromoCode"

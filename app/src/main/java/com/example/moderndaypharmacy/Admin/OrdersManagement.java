@@ -1,21 +1,20 @@
 package com.example.moderndaypharmacy.Admin;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.moderndaypharmacy.Models.OrderModel;
 import com.example.moderndaypharmacy.R;
-import com.example.moderndaypharmacy.User.Products;
 import com.example.moderndaypharmacy.Util.TextViewUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -60,7 +59,8 @@ public class OrdersManagement extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull OrderHolder holder, int position, @NonNull OrderModel model) {
                 holder.OrderState.setText(model.getOrderState());
-               holder.Items.setText(TextViewUtil.ItemsName(model.getProductList()));
+                if(model.getProductList()!=null&&model.getProductList().size()>0)
+                holder.Items.setText(TextViewUtil.ItemsName(model.getProductList()));
                 holder.total.setText(model.getTotal()+"JD");
                 holder.orderId.setText("Order ID: "+model.getId().subSequence(0,10));
                 holder.UserId.setText("User ID: "+model.getUserId().subSequence(0,10));
@@ -85,7 +85,7 @@ public class OrdersManagement extends Fragment {
         super.onStop();
         adapter.stopListening();
     }
-    static class OrderHolder extends RecyclerView.ViewHolder{
+    class OrderHolder extends RecyclerView.ViewHolder{
         TextView Date, Items , total,time, orderId,UserId , OrderState;
         public OrderHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,7 +95,16 @@ public class OrdersManagement extends Fragment {
             time = itemView.findViewById(R.id.time);
             Items = itemView.findViewById(R.id.productList);
             Date = itemView.findViewById(R.id.date);
-    total = itemView.findViewById(R.id.total);
+            total = itemView.findViewById(R.id.total);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(getView()).navigate(OrdersManagementDirections.actionOrdersManagementToOrderProcess(options.getSnapshots().get(getAdapterPosition())));
+
+                }
+            });
+
 
         }
 

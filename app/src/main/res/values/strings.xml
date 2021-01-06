@@ -5,4 +5,16 @@
     <string name="newProduct">Add new product</string>
     <string name="newCategory">Add new Category</string>
     <string name="map_key" translatable="false">AIzaSyCNJdx2l6utyMWmQTqGeqpvOQoAQ0c-wK8</string>
+    <string name="query">If you need any help, If you have any question Write it to get answer</string>
+    <string name="ads">Choose an Product to add new ads</string>
+    <string name="notes">Give us feedback , if you have any notes send it</string>
+
+
+    <string-array name="orderState">
+        <item>Delivered</item>
+        <item>Ordered</item>
+        <item>Completed</item>
+
+
+    </string-array>
 </resources>
