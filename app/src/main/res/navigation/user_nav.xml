@@ -59,6 +59,9 @@
         <action
             android:id="@+id/action_checkout_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_checkout_to_userOrder"
+            app:destination="@id/userOrder" />
     </fragment>
     <fragment
         android:id="@+id/profile2"

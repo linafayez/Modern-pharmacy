@@ -1,5 +1,6 @@
 package com.example.moderndaypharmacy.User;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -78,7 +79,7 @@ public class feedback extends Fragment {
             UID = FirebaseFirestore.getInstance().collection("Feedback").document().getId();
 
         }
-        Toast.makeText(getContext(),UID,Toast.LENGTH_LONG).show();
+
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         adapter = new FeedBackAdapter(getContext(),orderModel  , feedbackModel );
         products.setLayoutManager(manager);
@@ -88,6 +89,7 @@ public class feedback extends Fragment {
         pro= Change.getProducts(data);
         done = view.findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 done.setVisibility(View.INVISIBLE);

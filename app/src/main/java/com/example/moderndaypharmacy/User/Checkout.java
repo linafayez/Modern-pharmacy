@@ -101,7 +101,7 @@ public class Checkout extends Fragment {
           date = new Date();
           Timestamp timestamp = new Timestamp(date);
           String id= FirebaseFirestore.getInstance().collection("Orders").document().getId();
-            orderModel = new OrderModel(id, FirebaseAuth.getInstance().getCurrentUser().getUid(),data,timestamp,"con",10.0);
+            orderModel = new OrderModel(id, FirebaseAuth.getInstance().getCurrentUser().getUid(),data,timestamp,"confirmed",Double.parseDouble(tickerView.getText().split("JD")[0]));
 
             UploadOrder(orderModel);
 
@@ -126,7 +126,7 @@ public class Checkout extends Fragment {
         public void onSuccess(Void aVoid) {
 
             sharedPreference.SaveCart(new ArrayList<ProductModel>());
-           Navigation.findNavController(getView()).navigateUp();
+            Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_userOrder);
 
 
         }
