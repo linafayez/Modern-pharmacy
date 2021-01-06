@@ -54,6 +54,7 @@ Button checkout;
         data2 = new ArrayList<>();
         double sum= 0.0;
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager manager1=new LinearLayoutManager(getContext());
         if (data != null) {
             for (int i = 0; i < data.size(); i++) {
 

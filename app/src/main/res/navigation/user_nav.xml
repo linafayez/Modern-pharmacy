@@ -38,6 +38,9 @@
         android:label="fragment_checkout"
         tools:layout="@layout/fragment_checkout" >
         <action
+            android:id="@+id/action_checkout_to_camera2"
+            app:destination="@id/camera" />
+        <action
             android:id="@+id/action_checkout_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
@@ -84,8 +87,13 @@
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <activity
+        android:id="@+id/camera"
+        android:name="com.example.moderndaypharmacy.User.Camera"
+        android:label="activity_camera"
+        tools:layout="@layout/activity_camera" />
+    <activity
         android:id="@+id/mapFragment"
-        android:name="com.example.moderndaypharmacy.mapFragment"
+        android:name="com.example.moderndaypharmacy.User.mapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
 </navigation>

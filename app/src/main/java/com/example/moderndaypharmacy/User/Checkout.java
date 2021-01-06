@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.moderndaypharmacy.Models.CamModel;
 import com.example.moderndaypharmacy.Models.OrderModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
@@ -113,6 +114,13 @@ public class Checkout extends Fragment {
        Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_mapFragment);
         }
       });
+      addAdders.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_camera2);
+
+          }
+      });
 
     }
 
@@ -123,6 +131,8 @@ public class Checkout extends Fragment {
         public void onSuccess(Void aVoid) {
 
             sharedPreference.SaveCart(new ArrayList<ProductModel>());
+           Navigation.findNavController(getView()).navigateUp();
+           sharedPreference.SaveCamera(new ArrayList <CamModel>());
            Navigation.findNavController(getView()).navigateUp();
 
 

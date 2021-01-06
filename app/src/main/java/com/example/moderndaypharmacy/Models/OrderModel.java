@@ -14,6 +14,7 @@ public class OrderModel implements Serializable {
     private double total;
     private String note;
     private FeedbackModel feedbackModel;
+    private FeedbackModel camModel;
 
     public OrderModel(String id, String userId, ArrayList<ProductModel> productList, Timestamp time, String orderState, double total) {
         this.id = id;
@@ -79,6 +80,10 @@ public class OrderModel implements Serializable {
 
     public void setFeedbackModel(FeedbackModel feedbackModel) {
         this.feedbackModel = feedbackModel;
+    }
+    public FeedbackModel getCamModel(){return camModel;}
+    public void setCamModel(CamModel camModel){
+        this.camModel=feedbackModel;
     }
 
     public String getNote() {

@@ -1,4 +1,4 @@
-package com.example.moderndaypharmacy;
+package com.example.moderndaypharmacy.User;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 import android.widget.SearchView;
 
+import com.example.moderndaypharmacy.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

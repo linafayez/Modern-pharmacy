@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.moderndaypharmacy.Models.CamModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.google.gson.Gson;
@@ -67,7 +68,8 @@ public class SharedPreference {
         boolean have = false;
         if (productModelList == null ) {
             productModelList = new ArrayList<ProductModel>();
-        }else{
+        }
+        else{
            for (int i=0;i<productModelList.size();i++){
               if(productModelList.get(i).getID().equals(product.getID())){
                   have=true;
@@ -97,6 +99,7 @@ public class SharedPreference {
         }
         SaveCart( productModelList);
         return productModels;
+
     }
 
 
@@ -122,4 +125,79 @@ public class SharedPreference {
         return (ArrayList<ProductModel>) productModels;
     }
 
+    public static void SaveCamera(List<CamModel> came) {
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+        settings = context.getSharedPreferences("Camera",
+                Context.MODE_PRIVATE);
+        editor = settings.edit();
+
+        Gson gson = new Gson();
+        String cam = gson.toJson(came);
+        editor.putString("Camera", cam);
+        editor.apply();
+    }
+    public CamModel deleteCamera(CamModel cam){
+        ArrayList <ProductModel> camModelArrayList = getCartData();
+        ArrayList <ProductModel> camModels = new ArrayList <>();
+        if (camModels == null ) {
+            camModels = new ArrayList <>();
+        }else{
+            for (int i=0;i<camModelArrayList.size();i++){
+                if(!camModelArrayList.get(i).getID().equals(cam.getImage())){
+                    camModels.add(camModelArrayList.get(i));
+                }
+            }
+
+        }
+        List <CamModel> camModelList = null;
+        SaveCamera(camModelList);
+        return cam;
+
+    }
+    public void addToCamera(CamModel cam) {
+        ArrayList <ProductModel> camModelArrayList = getCartData();
+        boolean have = false;
+        if (camModelArrayList == null ) {
+            camModelArrayList = new ArrayList<ProductModel>();
+        }
+        else{
+            for (int i=0;i<camModelArrayList.size();i++){
+                if(camModelArrayList.get(i).getID().equals(cam.getImage())){
+                    have=true;
+                    break;
+                }
+            }
+        }
+        if(have == false)
+            camModelArrayList.add(cam);
+        else{
+            Toast.makeText(context,"from past",Toast.LENGTH_LONG).show();
+        }
+        SaveCamera( camModelArrayList);
+    }
+
+    private void SaveCamera(ArrayList<ProductModel> camModelArrayList) {
+    }
+
+    public ArrayList<CamModel> getCamData() {
+        SharedPreferences settings;
+        List<CamModel> camModels;
+
+        settings = context.getSharedPreferences("Camera",
+                Context.MODE_PRIVATE);
+
+        if (settings.contains("Camera")) {
+            String jsonFavorites = settings.getString("Camera", null);
+            Gson gson = new Gson();
+            CamModel[] camModels1 = gson.fromJson(jsonFavorites,
+                    CamModel[].class);
+
+            camModels= Arrays.asList(camModels1);
+            camModels = new ArrayList<CamModel>(camModels);
+        } else
+            return null;
+
+        return (ArrayList<CamModel>) camModels;
+    }
 }
