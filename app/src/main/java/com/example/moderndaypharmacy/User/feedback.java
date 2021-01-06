@@ -79,7 +79,7 @@ public class feedback extends Fragment {
             UID = FirebaseFirestore.getInstance().collection("Feedback").document().getId();
 
         }
-        Toast.makeText(getContext(),UID,Toast.LENGTH_LONG).show();
+
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         adapter = new FeedBackAdapter(getContext(),orderModel  , feedbackModel );
         products.setLayoutManager(manager);

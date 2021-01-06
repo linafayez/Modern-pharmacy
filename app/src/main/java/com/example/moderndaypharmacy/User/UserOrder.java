@@ -67,6 +67,7 @@ RecyclerView order;
                holder.state.setText(model.getOrderState());
                if(model.getProductList() != null && model.getProductList().size()!= 0 && model.getProductList().get(0).getPic().get(0)!= null )
                Picasso.get().load(Uri.parse(model.getProductList().get(0).getPic().get(0))).into(holder.image);
+               holder.id.setText("#OrderId"+model.getId().substring(0,7));
 //                holder.Date.setText(model.getTime().toDate()+"");
                 //   holder.Items.setText(TextViewUtil.ItemsName(model.getProductsModels()));
             }
@@ -91,7 +92,7 @@ RecyclerView order;
         adapter.stopListening();
     }
     class OrderViewHolder extends RecyclerView.ViewHolder{
-        TextView Date, Items , total , state;
+        TextView Date, Items , total , state,id;
         ImageView image;
         ArrayList products;
         Button userOrder;
@@ -103,6 +104,8 @@ RecyclerView order;
             state= itemView.findViewById(R.id.OrderState);
             image= itemView.findViewById(R.id.imageView5);
             userOrder=itemView.findViewById(R.id.order);
+            id= itemView.findViewById(R.id.Id);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

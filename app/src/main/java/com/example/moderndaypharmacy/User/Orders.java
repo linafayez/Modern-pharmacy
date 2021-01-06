@@ -191,7 +191,7 @@ public class Orders extends Fragment {
     }
     public void UploadFirebase(){
 
-        orderUser = new OrderModel(""+ Id, orderUser.getUserId(), orderUser.getProductList(), orderUser.getTime(),
+        orderUser = new OrderModel(Id, orderUser.getUserId(), orderUser.getProductList(), orderUser.getTime(),
                 orderUser.getOrderState(),  orderUser.getTotal());
 
         db.collection("Orders").document(Id)
