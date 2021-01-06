@@ -58,6 +58,8 @@ public class SplashScreen extends Fragment {
         currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
             auth();
+        }else{
+            updateUI(currentUser);
         }
 
     }
@@ -109,10 +111,7 @@ public class SplashScreen extends Fragment {
 
                 // ...
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+               auth();
             }
         }
     }
@@ -141,7 +140,7 @@ public class SplashScreen extends Fragment {
 
 
         }else{
-            //  auth();
+              auth();
         }
     }
 }
