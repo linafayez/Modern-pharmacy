@@ -115,7 +115,7 @@ public class SplashScreen extends Fragment {
             }
         }
     }
-    public void updateUI(@Nullable FirebaseUser user) {
+    public void updateUI(@Nullable final FirebaseUser user) {
         if(user != null){
             final SharedPreference sharedPreference = new SharedPreference(getContext());
         FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -123,7 +123,9 @@ public class SplashScreen extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserInfoModel userInfo = documentSnapshot.toObject(UserInfoModel.class);
                 if(userInfo == null){
-                   Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(null));
+                    UserInfoModel u = new UserInfoModel();
+                    u.setId(user.getUid());
+                   Navigation.findNavController(getView()).navigate(SplashScreenDirections.actionSplashScreenToUserInfo3(u));
                 }else{
                     sharedPreference.addUser(userInfo);
                     Intent done ;
