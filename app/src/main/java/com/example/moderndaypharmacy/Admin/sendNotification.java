@@ -2,7 +2,11 @@ package com.example.moderndaypharmacy.Admin;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -17,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.moderndaypharmacy.MainActivity;
+import com.example.moderndaypharmacy.MyFirebaseInstanceIDService;
 import com.example.moderndaypharmacy.R;
 
 
@@ -51,23 +56,26 @@ int i= 0;
     }
 
     private void send(String s, String text) {
-//        Intent intent = new Intent(getContext(), MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        //
-//        // Pan
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //
+        // Pan
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("n","n", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(s,text, NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getActivity().getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
 
         }
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),"n")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),s)
                 .setContentTitle(s)
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_baseline_notifications_none_24)
                 .setContentText(text);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
         managerCompat.notify(i++,builder.build());
+       // MyFirebaseInstanceIDService m = new MyFirebaseInstanceIDService(getContext());
+        //sendNotification(text, FirebaseAuth.getInstance().getCurrentUser().getUid(),"","o","k");
     }
+
 
 }
