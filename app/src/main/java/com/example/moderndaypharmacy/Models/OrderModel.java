@@ -14,7 +14,8 @@ public class OrderModel implements Serializable {
     private double total;
     private String note;
     private FeedbackModel feedbackModel;
-
+    private double latitude ;
+    private double longitude ;
     public OrderModel(String id, String userId, ArrayList<ProductModel> productList, Timestamp time, String orderState, double total) {
         this.id = id;
         this.userId = userId;
@@ -87,5 +88,21 @@ public class OrderModel implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }

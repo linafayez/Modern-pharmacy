@@ -1,6 +1,13 @@
 package com.example.moderndaypharmacy.User;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +15,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +33,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
@@ -109,17 +123,78 @@ public class Checkout extends Fragment {
           //UploadOrder(orderModel);
         }
       });
-      addAdders.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-       Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_mapFragment);
-        }
-      });
+        Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date = new Date();
+                Timestamp timestamp = new Timestamp(date);
+                if (longitude != 0.0 && latitude != 0.0) {
+                    Order.setVisibility(View.INVISIBLE);
+                    orderModel = new OrderModel(uniqueID, FirebaseAuth.getInstance().getCurrentUser().getUid(),data,timestamp,"confirmed",Double.parseDouble(tickerView.getText().split("JD")[0]));
+                    orderModel.setTime(timestamp);
+                    orderModel.setLatitude(latitude);
+                    orderModel.setLongitude(longitude);
+                    UploadOrder(orderModel);
+                } else {
+                    goToMap();
+                }
+                // orderModel.setTime(timestamp);
+                //UploadOrder(orderModel);
+            }
+        });
+        addAdders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMap();
+            }
+        });
 
     }
 
-  private void UploadOrder(OrderModel orderModel) {
+    private void goToMap() {
+        Dexter.withContext(getContext())
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        Intent intent = new Intent(getActivity(), map_address.class);
+                        startActivityForResult(intent, 1);
+
+                        // Navigation.findNavController(getView()).navigate(R.id.action_checkOut_to_map);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                        if (permissionDeniedResponse.isPermanentlyDenied()) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Permission Denied")
+                                    .setMessage("Permission to access location, you should go to settings and allow location")
+                                    .setNegativeButton("cancel", null)
+                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent();
+                                            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            intent.setData(Uri.fromParts("package", getActivity().getPackageName(), null));
+
+                                            //startActivity(new Intent(getContext(),));
+                                        }
+                                    }).show();
+                        } else {
+                            Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+
+                    }
+
+
+                }).check();
+    }
+
+    private void UploadOrder(OrderModel orderModel) {
 
     FirebaseFirestore.getInstance().collection("Orders").document(orderModel.getId()).set(orderModel).addOnSuccessListener(new OnSuccessListener <Void>() {
         @Override
@@ -133,6 +208,26 @@ public class Checkout extends Fragment {
     });
 
   }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle extras = data.getExtras();
+                if (extras != null) {
+                    latitude = extras.getDouble("Latitude");
+                    longitude = extras.getDouble("Longitude");
+                    address.setVisibility(View.VISIBLE);
+                    address.setText(TextViewUtil.getCompleteAddressString(latitude, longitude,getContext()));
+
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
     public void getPromoCode() {
         FirebaseFirestore.getInstance().collection("PromoCode").whereEqualTo("code", voucher.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override

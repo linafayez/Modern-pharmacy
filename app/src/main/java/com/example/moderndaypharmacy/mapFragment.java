@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,8 @@ public class mapFragment extends FragmentActivity implements OnMapReadyCallback 
 
 
     public View onCreateView(Bundle savedInstanceState, View view) {
+        Toast.makeText(getApplicationContext(),"l",Toast.LENGTH_LONG).show();
+
         SupportMapFragment supportMapFragment;
                 searchView = findViewById(R.id.sv_location);
 

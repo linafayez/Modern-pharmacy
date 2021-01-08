@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_checkout_to_userOrder"
             app:destination="@id/userOrder" />
+        <action
+            android:id="@+id/action_checkout_to_map_address"
+            app:destination="@id/map_address" />
     </fragment>
     <fragment
         android:id="@+id/profile2"
@@ -142,4 +145,14 @@
         android:name="com.example.moderndaypharmacy.mapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.moderndaypharmacy.MainActivity"
+        android:label="activity_map"
+        tools:layout="@layout/activity_map" />
+    <activity
+        android:id="@+id/map_address"
+        android:name="com.example.moderndaypharmacy.User.map_address"
+        android:label="content_map"
+        tools:layout="@layout/content_map" />
 </navigation>
