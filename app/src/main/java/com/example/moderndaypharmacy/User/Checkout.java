@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moderndaypharmacy.Models.OrderModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
+import com.example.moderndaypharmacy.Models.ScanModel;
 import com.example.moderndaypharmacy.R;
 import com.example.moderndaypharmacy.Util.TextViewUtil;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +34,9 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -42,15 +46,20 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 public class Checkout extends Fragment {
-    RecyclerView items;
+    RecyclerView items,scans;
     OrderModel orderModel;
     ItemsAdapter adapter;
+    ScanAdapter scanAdapter;
     ArrayList<ProductModel> data;
+    ArrayList<ScanModel> scanModels;
     SharedPreference sharedPreference;
     EditText voucher , note;
     TickerView tickerView;
@@ -62,6 +71,8 @@ public class Checkout extends Fragment {
     double longitude;
     FirebaseFirestore db ;
     static TextView subTotal, shipping, address;
+    private StorageReference mStorageRef;
+
     public Checkout() {
         // Required empty public constructor
     }
@@ -77,6 +88,7 @@ public class Checkout extends Fragment {
         super.onViewCreated(view, savedInstanceState);
          DecimalFormat df2 = new DecimalFormat("#.##");
         Order = view.findViewById(R.id.Order);
+        scans= view.findViewById(R.id.scans);
         tickerView = view.findViewById(R.id.tickerView);
         note = view.findViewById(R.id.note);
         db = FirebaseFirestore.getInstance();
@@ -85,6 +97,7 @@ public class Checkout extends Fragment {
         ApplyVoucher = view.findViewById(R.id.button5);
         voucher = view.findViewById(R.id.voucher);
         items = view.findViewById(R.id.items);
+        mStorageRef = FirebaseStorage.getInstance().getReference("Orders");
         subTotal = view.findViewById(R.id.subtotal);
         addAdders = view.findViewById(R.id.addAdders);
         shipping = view.findViewById(R.id.shipping);
@@ -93,45 +106,46 @@ public class Checkout extends Fragment {
         sharedPreference = new SharedPreference(getContext());
         data = new ArrayList<>();
         data = sharedPreference.getCartData();
+        scanModels = sharedPreference.getCartScanData();
         tickerView.setText(df2.format(TextViewUtil.setSubTotal(data) + 3 )+ "JD");
         subTotal.setText(df2.format(TextViewUtil.setSubTotal(data)) + "JD");
         //total.setText();
         shipping.setText("3JD");
       RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager manager2 = new LinearLayoutManager(getContext());
      // Cart.changed.setTotal(data);
        adapter = new ItemsAdapter(getContext(), data);
+       scanAdapter = new ScanAdapter(scanModels, getContext(),"ch");
+       scans.setLayoutManager(manager2);
+       scans.setHasFixedSize(false);
+       scans.setAdapter(scanAdapter);
       items.setLayoutManager(manager);
       items.setHasFixedSize(false);
       items.setAdapter(adapter);
+        if(scanModels.size()>0){
+            upladImages(scanModels);
+        }
       ApplyVoucher.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
           getPromoCode();
         }
       });
-      Order.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          date = new Date();
-          Timestamp timestamp = new Timestamp(date);
-          String id= FirebaseFirestore.getInstance().collection("Orders").document().getId();
-            orderModel = new OrderModel(id, FirebaseAuth.getInstance().getCurrentUser().getUid(),data,timestamp,"confirmed",Double.parseDouble(tickerView.getText().split("JD")[0]));
-
-            UploadOrder(orderModel);
-
-          // orderModel.setTime(timestamp);
-          //UploadOrder(orderModel);
-        }
-      });
         Order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                date = new Date();
-                Timestamp timestamp = new Timestamp(date);
+
                 if (longitude != 0.0 && latitude != 0.0) {
+
+                    date = new Date();
+                    Timestamp timestamp = new Timestamp(date);
                     Order.setVisibility(View.INVISIBLE);
                     orderModel = new OrderModel(uniqueID, FirebaseAuth.getInstance().getCurrentUser().getUid(),data,timestamp,"confirmed",Double.parseDouble(tickerView.getText().split("JD")[0]));
                     orderModel.setTime(timestamp);
+                    orderModel.setScanModels(scanModels);
+
+                    if(note.getText()!= null)
+                        orderModel.setNote(note.getText().toString());
                     orderModel.setLatitude(latitude);
                     orderModel.setLongitude(longitude);
                     UploadOrder(orderModel);
@@ -148,6 +162,32 @@ public class Checkout extends Fragment {
                 goToMap();
             }
         });
+
+    }
+
+    public synchronized void upladImages(final ArrayList<ScanModel> scanModels) {
+        for( int i = 0;i<scanModels.size();++i){
+            Uri inImage = Uri.parse(scanModels.get(i).getImage());
+
+            final StorageReference childRef = mStorageRef.child(uniqueID+i);
+            final int finalI = i;
+            childRef.putFile(inImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //    Toast.makeText(UploadProduct.this,"Done Upload Image",Toast.LENGTH_LONG).show();
+                    childRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url= String.valueOf(uri);
+                            scanModels.get(finalI).setImage(url);
+
+                        }
+                    });
+
+                }
+            });
+        }
+        Toast.makeText(getContext(),"Done Upload Image",Toast.LENGTH_LONG).show();
 
     }
 
@@ -201,6 +241,7 @@ public class Checkout extends Fragment {
         public void onSuccess(Void aVoid) {
 
             sharedPreference.SaveCart(new ArrayList<ProductModel>());
+            sharedPreference.SaveScanCart(new ArrayList<ScanModel>());
             Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_userOrder);
 
 

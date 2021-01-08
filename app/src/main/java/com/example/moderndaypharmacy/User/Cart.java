@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moderndaypharmacy.Models.ProductModel;
+import com.example.moderndaypharmacy.Models.ScanModel;
 import com.example.moderndaypharmacy.R;
 import com.example.moderndaypharmacy.Util.TextViewUtil;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,13 +27,15 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Cart extends Fragment {
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,ScanView;
     SharedPreference sharedPreference;
     ArrayList<ProductModel> data , data2;
+    ArrayList<ScanModel> models;
 Button checkout;
-    RecyclerView.Adapter adapter;
-    static TextView total;
 
+    RecyclerView.Adapter adapter,scanAdapter;
+    static TextView total;
+    static DecimalFormat df2 = new DecimalFormat("#.##");
     public Cart() {
         // Required empty public constructor
     }
@@ -46,7 +50,9 @@ Button checkout;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        DecimalFormat df2 = new DecimalFormat("#.##");
+
+        models= new ArrayList<>();
+        ScanView = view.findViewById(R.id.scan);
         total = view.findViewById(R.id.total);
         checkout = view.findViewById(R.id.checkout);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -56,6 +62,7 @@ Button checkout;
         data2 = new ArrayList<>();
         double sum= 0.0;
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager manager2 = new LinearLayoutManager(getContext());
         if (data != null) {
             for (int i = 0; i < data.size(); i++) {
 
@@ -71,8 +78,13 @@ Button checkout;
                 sum += price * number;
             }
         }
+        models = sharedPreference.getCartScanData();
         total.setText(df2.format(sum) + "JD");
         adapter = new CartAdapter(data);
+        scanAdapter = new ScanAdapter(models, getContext(),"cart");
+        ScanView.setLayoutManager(manager2);
+        ScanView.setHasFixedSize(false);
+        ScanView.setAdapter(scanAdapter);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(false);
         recyclerView.setAdapter(adapter);
@@ -110,7 +122,7 @@ Button checkout;
     public static class changed {
         public static void total(double t) {
             double price = Double.parseDouble(total.getText().toString().split("JD")[0]);
-            total.setText(price + t + "JD");
+            total.setText(df2.format(price + t )+ "JD");
 
         }
 

@@ -9,6 +9,7 @@ public class OrderModel implements Serializable {
     private String id;
     private String userId;
     private ArrayList<ProductModel> productList;
+    private ArrayList<ScanModel> scanModels;
     private Timestamp time;
     private String orderState;
     private double total;
@@ -104,5 +105,13 @@ public class OrderModel implements Serializable {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public ArrayList<ScanModel> getScanModels() {
+        return scanModels;
+    }
+
+    public void setScanModels(ArrayList<ScanModel> scanModels) {
+        this.scanModels = scanModels;
     }
 }
