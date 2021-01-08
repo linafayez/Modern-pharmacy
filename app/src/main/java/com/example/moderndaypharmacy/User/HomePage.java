@@ -84,7 +84,7 @@ SharedPreference sharedPreference;
         query=view.findViewById(R.id.query);
         sharedPreference = new SharedPreference(getContext());
         scan = view.findViewById(R.id.scan);
-        image = view.findViewById(R.id.i);
+
         final Bundle bundle = new Bundle();
         bundle.putString("newQ","new");
         View.OnClickListener q= Navigation.createNavigateOnClickListener(R.id.action_homePage_to_query,bundle);
@@ -130,7 +130,7 @@ SharedPreference sharedPreference;
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkCameraHardware(getContext());
+               // checkCameraHardware(getContext());
             }
         });
 

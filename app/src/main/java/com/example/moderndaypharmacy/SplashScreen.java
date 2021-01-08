@@ -99,19 +99,21 @@ public class SplashScreen extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: "+data.getDataString());
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
+        if(data!=null) {
+            Log.d(TAG, "onActivityResult: " + data.getDataString());
+            if (requestCode == RC_SIGN_IN) {
+                IdpResponse response = IdpResponse.fromResultIntent(data);
 
-            if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Log.d(TAG, "onActivityResult: " + user.toString());
-                updateUI(user);
+                if (resultCode == RESULT_OK) {
+                    // Successfully signed in
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    Log.d(TAG, "onActivityResult: " + user.toString());
+                    updateUI(user);
 
-                // ...
-            } else {
-               auth();
+                    // ...
+                } else {
+                    auth();
+                }
             }
         }
     }
@@ -146,9 +148,5 @@ public class SplashScreen extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateUI(FirebaseAuth.getInstance().getCurrentUser());
-    }
+
 }

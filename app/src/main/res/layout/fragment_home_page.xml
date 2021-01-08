@@ -66,9 +66,10 @@
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.901"
-        app:layout_constraintStart_toEndOf="@+id/cardView4"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.542">
 
         <LinearLayout
             android:id="@+id/query"
@@ -79,8 +80,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="116dp"
+                android:layout_width="163dp"
+                android:layout_height="105dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/q"></ImageView>
 
@@ -144,50 +145,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cardView3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        app:layout_constraintVertical_bias="0.514">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_margin="16dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="116dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/map">
-
-            </ImageView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:gravity="center"
-                android:text="Map "
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold">
-
-            </TextView>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -199,14 +156,12 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.901"
-        app:layout_constraintStart_toEndOf="@+id/cardView4"
         app:layout_constraintTop_toBottomOf="@+id/Ads">
 
         <LinearLayout
+            android:id="@+id/scan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/scan"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_margin="16dp"
             android:orientation="vertical">
@@ -237,10 +192,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Ads"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="266dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 

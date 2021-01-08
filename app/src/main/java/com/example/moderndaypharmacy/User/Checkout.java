@@ -122,7 +122,7 @@ public class Checkout extends Fragment {
       items.setLayoutManager(manager);
       items.setHasFixedSize(false);
       items.setAdapter(adapter);
-        if(scanModels.size()>0){
+        if(scanModels.size()>0) {
             upladImages(scanModels);
         }
       ApplyVoucher.setOnClickListener(new View.OnClickListener() {

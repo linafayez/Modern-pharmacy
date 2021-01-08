@@ -32,6 +32,7 @@ public class Cart extends Fragment {
     ArrayList<ProductModel> data , data2;
     ArrayList<ScanModel> models;
 Button checkout;
+TextView text,label;
 
     RecyclerView.Adapter adapter,scanAdapter;
     static TextView total;
@@ -50,7 +51,8 @@ Button checkout;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+text = view.findViewById(R.id.l);
+label = view.findViewById(R.id.ll);
         models= new ArrayList<>();
         ScanView = view.findViewById(R.id.scan);
         total = view.findViewById(R.id.total);
@@ -78,7 +80,7 @@ Button checkout;
                 sum += price * number;
             }
         }
-        models = sharedPreference.getCartScanData();
+
         total.setText(df2.format(sum) + "JD");
         adapter = new CartAdapter(data);
         scanAdapter = new ScanAdapter(models, getContext(),"cart");
@@ -94,7 +96,15 @@ Button checkout;
                 Navigation.findNavController(getView()).navigate(R.id.action_cart_to_checkout);
             }
         });
-        final ArrayList<ProductModel> models= new ArrayList<>();
+        models = sharedPreference.getCartScanData();
+        if(models != null  || models.size()==0){
+            text.setVisibility(View.INVISIBLE);
+        }else {
+            if(data != null && data.size() ==0){
+                label.setVisibility(View.INVISIBLE);
+            }
+        }
+
         if(data!=null) {
             for (int i = 0; i < data.size(); i++) {
                 final int finalI = i;
