@@ -171,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="116dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/scan">
+                android:src="@drawable/cam">
 
             </ImageView>
 
@@ -179,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text="Scan Barcode"
+                android:text="Scan"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
