@@ -97,7 +97,8 @@ label = view.findViewById(R.id.ll);
             }
         });
         models = sharedPreference.getCartScanData();
-        if(models != null  || models.size()==0){
+        if(models != null )
+        if( models.size()==0){
             text.setVisibility(View.INVISIBLE);
         }else {
             if(data != null && data.size() ==0){

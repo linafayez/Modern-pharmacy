@@ -17,7 +17,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class AdminHomePage extends Fragment {
-Button newProduct,newCategory, editCategory , newPromoCode , editProduct,newAds,manageQueries,editAds;
+Button newProduct,newCategory, editCategory , newPromoCode , editProduct,newAds,manageQueries,editAds,reviewFeedback;
     FirestoreRecyclerAdapter adapter;
     FirestoreRecyclerOptions<PromoCodeModel> response;
     public AdminHomePage() {
@@ -36,13 +36,19 @@ Button newProduct,newCategory, editCategory , newPromoCode , editProduct,newAds,
         super.onViewCreated(view, savedInstanceState);
         newProduct = view.findViewById(R.id.newProduct);
         editProduct= view.findViewById(R.id.editProduct);
+        reviewFeedback = view.findViewById(R.id.feedBack);
         newPromoCode = view.findViewById(R.id.promoCode);
         newCategory= view.findViewById(R.id.newCategory);
         editCategory = view.findViewById(R.id.editCategory);
         newAds=view.findViewById(R.id.newAds);
         manageQueries=view.findViewById(R.id.manageQueries);
         editAds=view.findViewById(R.id.editAds);
-
+         reviewFeedback.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Navigation.findNavController(getView()).navigate(R.id.action_adminHomePage_to_reviewFeedback);
+             }
+         });
         final Bundle bundle4 = new Bundle();
         newAds.setOnClickListener(new View.OnClickListener() {
             @Override

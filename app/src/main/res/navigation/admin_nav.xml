@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_adminHomePage_to_allProducts"
             app:destination="@id/allProducts" />
+        <action
+            android:id="@+id/action_adminHomePage_to_reviewFeedback"
+            app:destination="@id/reviewFeedback" />
 
 
     </fragment>
@@ -185,4 +188,9 @@
             android:id="@+id/action_allPromoCode_to_addPromoCode"
             app:destination="@id/addPromoCode" />
     </fragment>
+    <fragment
+        android:id="@+id/reviewFeedback"
+        android:name="com.example.moderndaypharmacy.Admin.ReviewFeedback"
+        android:label="fragment_review_feedback"
+        tools:layout="@layout/fragment_review_feedback" />
 </navigation>

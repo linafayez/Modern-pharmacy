@@ -10,7 +10,7 @@ public class FeedbackModel {
     private Timestamp timestamp;
     private String userId;
     private String OrderId;
-    private UserInfo user;
+    private UserInfoModel user;
     private String id;
 
     public static class feed {
@@ -51,11 +51,11 @@ public class FeedbackModel {
         }
     }
     private ArrayList<feed> models;
-    public UserInfo getUser() {
+    public UserInfoModel getUser() {
         return user;
     }
 
-    public void setUser(UserInfo user) {
+    public void setUser(UserInfoModel user) {
         this.user = user;
     }
 

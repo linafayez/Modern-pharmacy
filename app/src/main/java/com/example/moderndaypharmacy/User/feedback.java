@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.moderndaypharmacy.Models.FeedbackModel;
 import com.example.moderndaypharmacy.Models.OrderModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
+import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.example.moderndaypharmacy.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,9 +43,10 @@ public class feedback extends Fragment {
     static FeedbackModel feedbackModel;
     static ArrayList<ProductModel> models , pro;
     FloatingActionButton done;
-    static UserInfo user;
+    static UserInfoModel user;
     ProgressBar progressBar;
     static ArrayList<FeedbackModel.feed> feeds;
+    SharedPreference sharedPreference;
     public feedback() {
         // Required empty public constructor
     }
@@ -62,8 +64,10 @@ public class feedback extends Fragment {
         progressBar = view.findViewById(R.id.progressBar2);
         models = new ArrayList<>();
         feeds = new ArrayList<>();
+        sharedPreference= new SharedPreference(getContext());
         pro = new ArrayList<>();
-        user = Change.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+      //  user = Change.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        user = sharedPreference.getUser();
         orderModel = feedbackArgs.fromBundle(getArguments()).getOrder();
         products = view.findViewById(R.id.products);
         data = feedbackArgs.fromBundle(getArguments()).getOrder().getProductList();
@@ -210,12 +214,12 @@ public class feedback extends Fragment {
         }
 
 
-        public static UserInfo getUser(String uid) {
+        public static UserInfoModel getUser(String uid) {
             FirebaseFirestore.getInstance().collection("User").document(uid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if(documentSnapshot!= null){
-                        user = documentSnapshot.toObject(UserInfo.class);
+                        user = documentSnapshot.toObject(UserInfoModel.class);
                     }
                 }
             });

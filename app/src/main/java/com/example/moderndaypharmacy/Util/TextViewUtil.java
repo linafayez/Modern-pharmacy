@@ -22,7 +22,7 @@ public class TextViewUtil {
     public static Spanned feedbackDara(FeedbackModel data){
         String text ="<ul>";
         for(int i=0;i < data.getModels().size();i++) {
-            text +="<li>"+data.getModels().get(i).getProduct().getName()+ "</li><tab>"+data.getModels().get(i).getRating();
+            text +="<li> Product name: "+data.getModels().get(i).getProduct().getName()+ "<br> Rating:"+data.getModels().get(i).getRating()+"<br> Note :"+data.getModels().get(i).getNote();
         }
         text+="</ul>";
 
