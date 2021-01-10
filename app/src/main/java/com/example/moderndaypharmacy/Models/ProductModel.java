@@ -13,8 +13,7 @@ public class ProductModel implements Serializable {
     private ArrayList<String> thumbnailPic;
     private ArrayList<String> pic;
     private String category_id ;
-    private float rating;
-    private ArrayList<String> note;
+
 
      public ProductModel(){
          setItemNumberInCart(0);
@@ -111,19 +110,4 @@ public class ProductModel implements Serializable {
         this.itemNumberInCart = itemNumberInCart;
     }
 
-    public ArrayList<String> getNote() {
-        return note;
-    }
-
-    public void setNote(ArrayList<String> note) {
-        this.note = note;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
 }

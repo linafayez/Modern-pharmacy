@@ -28,7 +28,7 @@ public class Ads extends Fragment {
     RecyclerView ads;
     FirebaseFirestore db;
     FirestoreRecyclerAdapter adapter;
-    FirestoreRecyclerOptions<AdsModel> response;
+    static FirestoreRecyclerOptions<AdsModel> response;
 
     public Ads() {
         // Required empty public constructor
@@ -91,8 +91,8 @@ public class Ads extends Fragment {
         adapter.stopListening();
     }
 
-    public class AdsHolder extends RecyclerView.ViewHolder {
-        ImageView image;
+    public static class AdsHolder extends RecyclerView.ViewHolder {
+        public ImageView image;
 
         public AdsHolder(@NonNull final View itemView) {
             super(itemView);
@@ -104,7 +104,7 @@ public class Ads extends Fragment {
                     final Bundle bundle = new Bundle();
                         Gson gson = new Gson();
                         bundle.putString("type",gson.toJson(response.getSnapshots().get(getAdapterPosition())));
-                        Navigation.createNavigateOnClickListener(R.id.action_ads_to_addAds,bundle).onClick(getView());
+                        Navigation.createNavigateOnClickListener(R.id.action_ads_to_addAds,bundle).onClick(itemView.getRootView());
 
                 }
         });

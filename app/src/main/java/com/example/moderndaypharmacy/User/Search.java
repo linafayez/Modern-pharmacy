@@ -132,7 +132,7 @@ public class Search extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-               //     Navigation.findNavController(getView()).navigate(SearchPageDirections.actionSearchPageToProductView(options.getSnapshots().get(getAdapterPosition())));
+                Navigation.findNavController(getView()).navigate(SearchDirections.actionSearch2ToProductView(options.getSnapshots().get(getAdapterPosition())));
                 }
             });
         }

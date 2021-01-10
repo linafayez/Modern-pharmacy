@@ -6,6 +6,7 @@ import android.location.Geocoder;
 import android.text.Html;
 import android.text.Spanned;
 
+import com.example.moderndaypharmacy.Models.FeedbackModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
 
 import java.text.DecimalFormat;
@@ -18,9 +19,14 @@ public class TextViewUtil {
     public static String getPriceToDisplay(int price, int i){
         return df2.format(price*i / 100.0) + "JD";
     }
-    public static Spanned getOldPrice(int price, int i){
-        Spanned spanned =  Html.fromHtml("<del>"+TextViewUtil.getPriceToDisplay(price,i)+"</del>");
-        return spanned;
+    public static Spanned feedbackDara(FeedbackModel data){
+        String text ="<ul>";
+        for(int i=0;i < data.getModels().size();i++) {
+            text +="<li> Product name: "+data.getModels().get(i).getProduct().getName()+ "<br> Rating:"+data.getModels().get(i).getRating()+"<br> Note :"+data.getModels().get(i).getNote();
+        }
+        text+="</ul>";
+
+        return Html.fromHtml(text);
     }
     public static String getDiscountToDisplay(int price,int discount, int i){
         Double p =price/100.0 ;

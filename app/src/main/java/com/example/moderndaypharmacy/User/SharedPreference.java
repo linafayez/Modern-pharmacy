@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
-import com.example.moderndaypharmacy.Models.CamModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
+import com.example.moderndaypharmacy.Models.ScanModel;
 import com.example.moderndaypharmacy.Models.UserInfoModel;
 import com.google.gson.Gson;
 
@@ -50,56 +50,57 @@ public class SharedPreference {
 
         return user;
     }
-    public static void SaveCart(List<ProductModel> pro) {
+    public static void SaveScanCart(List<ScanModel> models) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
-        settings = context.getSharedPreferences("ProductCart",
+        settings = context.getSharedPreferences("ScanModelCart",
                 Context.MODE_PRIVATE);
         editor = settings.edit();
 
         Gson gson = new Gson();
-        String product = gson.toJson(pro);
-        editor.putString("Product", product);
+        String Scan = gson.toJson(models);
+        editor.putString("Scan", Scan);
 
         editor.apply();
     }
-    public void addToCart(ProductModel product) {
-        ArrayList<ProductModel> productModelList = getCartData();
+    public void addToScanCart(ScanModel scan) {
+        ArrayList<ScanModel> ScanModelList = getCartScanData();
         boolean have = false;
-        if (productModelList == null ) {
-            productModelList = new ArrayList<ProductModel>();
-        }
-        else{
-           for (int i=0;i<productModelList.size();i++){
-              if(productModelList.get(i).getID().equals(product.getID())){
+        if (ScanModelList == null ) {
+            ScanModelList = new ArrayList<ScanModel>();
+        }else{
+           for (int i=0;i<ScanModelList.size();i++){
+              if(ScanModelList.get(i).getId().equals(scan.getId())){
                   have=true;
                   break;
               }
             }
         }
-        if(have == false)
-           productModelList.add(product);
-        else{
+        if(have == false) {
+            ScanModelList.add(scan);
+            Toast.makeText(context, "Done", Toast.LENGTH_LONG).show();
+        }else{
             Toast.makeText(context,"from past",Toast.LENGTH_LONG).show();
         }
-        SaveCart( productModelList);
+        SaveScanCart(ScanModelList);
     }
-    public ArrayList<ProductModel> deleteProduct(ProductModel product){
-        ArrayList<ProductModel> productModelList = getCartData();
-        ArrayList<ProductModel> productModels = new ArrayList<>();
-        if (productModelList == null ) {
-            productModelList = new ArrayList<ProductModel>();
+    public ArrayList<ScanModel> deleteScan(ScanModel scan){
+        ArrayList<ScanModel> scanModelList = getCartScanData();
+        ArrayList<ScanModel> ScanModels = new ArrayList<>();
+        if (scanModelList == null ) {
+            scanModelList = new ArrayList<ScanModel>();
         }else{
-            for (int i=0;i<productModelList.size();i++){
-                if(!productModelList.get(i).getID().equals(product.getID())){
-                    productModels.add(productModelList.get(i));
+            for (int i=0;i<scanModelList.size();i++){
+                if(!scanModelList.get(i).getId().equals(scan.getId())){
+                    ScanModels.add(scanModelList.get(i));
+                }else{
+                    Toast.makeText(context,"deleted",Toast.LENGTH_LONG).show();
                 }
             }
 
         }
-        SaveCart( productModelList);
-        return productModels;
-
+        SaveScanCart(ScanModels);
+        return ScanModels;
     }
 
 
@@ -125,79 +126,78 @@ public class SharedPreference {
         return (ArrayList<ProductModel>) productModels;
     }
 
-    public static void SaveCamera(List<CamModel> came) {
+
+
+    public static void SaveCart(List<ProductModel> pro) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
-        settings = context.getSharedPreferences("Camera",
+        settings = context.getSharedPreferences("ProductCart",
                 Context.MODE_PRIVATE);
         editor = settings.edit();
 
         Gson gson = new Gson();
-        String cam = gson.toJson(came);
-        editor.putString("Camera", cam);
+        String product = gson.toJson(pro);
+        editor.putString("Product", product);
+
         editor.apply();
     }
-    public CamModel deleteCamera(CamModel cam){
-        ArrayList <ProductModel> camModelArrayList = getCartData();
-        ArrayList <ProductModel> camModels = new ArrayList <>();
-        if (camModels == null ) {
-            camModels = new ArrayList <>();
-        }else{
-            for (int i=0;i<camModelArrayList.size();i++){
-                if(!camModelArrayList.get(i).getID().equals(cam.getImage())){
-                    camModels.add(camModelArrayList.get(i));
-                }
-            }
-
-        }
-        List <CamModel> camModelList = null;
-        SaveCamera(camModelList);
-        return cam;
-
-    }
-    public void addToCamera(CamModel cam) {
-        ArrayList <ProductModel> camModelArrayList = getCartData();
+    public void addToCart(ProductModel product) {
+        ArrayList<ProductModel> productModelList = getCartData();
         boolean have = false;
-        if (camModelArrayList == null ) {
-            camModelArrayList = new ArrayList<ProductModel>();
-        }
-        else{
-            for (int i=0;i<camModelArrayList.size();i++){
-                if(camModelArrayList.get(i).getID().equals(cam.getImage())){
+        if (productModelList == null ) {
+            productModelList = new ArrayList<ProductModel>();
+        }else{
+            for (int i=0;i<productModelList.size();i++){
+                if(productModelList.get(i).getID().equals(product.getID())){
                     have=true;
                     break;
                 }
             }
         }
         if(have == false)
-            camModelArrayList.add(cam);
+            productModelList.add(product);
         else{
             Toast.makeText(context,"from past",Toast.LENGTH_LONG).show();
         }
-        SaveCamera( camModelArrayList);
+        SaveCart( productModelList);
+    }
+    public ArrayList<ProductModel> deleteProduct(ProductModel product){
+        ArrayList<ProductModel> productModelList = getCartData();
+        ArrayList<ProductModel> productModels = new ArrayList<>();
+        if (productModelList == null ) {
+            productModelList = new ArrayList<ProductModel>();
+        }else{
+            for (int i=0;i<productModelList.size();i++){
+                if(!productModelList.get(i).getID().equals(product.getID())){
+                    productModels.add(productModelList.get(i));
+                }
+            }
+
+        }
+        SaveCart( productModelList);
+        return productModels;
     }
 
-    private void SaveCamera(ArrayList<ProductModel> camModelArrayList) {
-    }
 
-    public ArrayList<CamModel> getCamData() {
+
+    public ArrayList<ScanModel> getCartScanData() {
         SharedPreferences settings;
-        List<CamModel> camModels;
+        List<ScanModel> ScanModels;
 
-        settings = context.getSharedPreferences("Camera",
+        settings = context.getSharedPreferences("ScanModelCart",
                 Context.MODE_PRIVATE);
 
-        if (settings.contains("Camera")) {
-            String jsonFavorites = settings.getString("Camera", null);
+        if (settings.contains("Scan")) {
+            String jsonFavorites = settings.getString("Scan", null);
             Gson gson = new Gson();
-            CamModel[] camModels1 = gson.fromJson(jsonFavorites,
-                    CamModel[].class);
+            ScanModel[] cartItem = gson.fromJson(jsonFavorites,
+                    ScanModel[].class);
 
-            camModels= Arrays.asList(camModels1);
-            camModels = new ArrayList<CamModel>(camModels);
+            ScanModels = Arrays.asList(cartItem);
+            ScanModels = new ArrayList<ScanModel>(ScanModels);
         } else
             return null;
 
-        return (ArrayList<CamModel>) camModels;
+        return (ArrayList<ScanModel>) ScanModels;
     }
 }

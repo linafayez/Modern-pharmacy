@@ -60,6 +60,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation 'com.robinhood.ticker:ticker:2.0.2'
+    implementation 'com.littlemango:stacklayoutmanager:1.0.5'
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+    implementation 'com.karumi:dexter:6.2.2'
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
 
 
 }
