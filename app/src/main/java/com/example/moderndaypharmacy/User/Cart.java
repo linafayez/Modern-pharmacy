@@ -80,7 +80,15 @@ label = view.findViewById(R.id.ll);
                 sum += price * number;
             }
         }
-
+        models = sharedPreference.getCartScanData();
+        if(models != null )
+            if( models.size()==0){
+                text.setVisibility(View.INVISIBLE);
+            }else {
+                if(data != null && data.size() ==0){
+                    label.setVisibility(View.INVISIBLE);
+                }
+            }
         total.setText(df2.format(sum) + "JD");
         adapter = new CartAdapter(data);
         scanAdapter = new ScanAdapter(models, getContext(),"cart");
@@ -96,15 +104,7 @@ label = view.findViewById(R.id.ll);
                 Navigation.findNavController(getView()).navigate(R.id.action_cart_to_checkout);
             }
         });
-        models = sharedPreference.getCartScanData();
-        if(models != null )
-        if( models.size()==0){
-            text.setVisibility(View.INVISIBLE);
-        }else {
-            if(data != null && data.size() ==0){
-                label.setVisibility(View.INVISIBLE);
-            }
-        }
+
 
         if(data!=null) {
             for (int i = 0; i < data.size(); i++) {

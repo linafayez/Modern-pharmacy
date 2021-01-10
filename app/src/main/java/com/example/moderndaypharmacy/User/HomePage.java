@@ -130,7 +130,7 @@ SharedPreference sharedPreference;
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // checkCameraHardware(getContext());
+                checkCameraHardware(getContext());
             }
         });
 

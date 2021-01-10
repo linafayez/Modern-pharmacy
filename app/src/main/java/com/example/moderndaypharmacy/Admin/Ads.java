@@ -104,7 +104,7 @@ public class Ads extends Fragment {
                     final Bundle bundle = new Bundle();
                         Gson gson = new Gson();
                         bundle.putString("type",gson.toJson(response.getSnapshots().get(getAdapterPosition())));
-                        Navigation.createNavigateOnClickListener(R.id.action_ads_to_addAds,bundle).onClick(itemView.getRootView());
+                        Navigation.createNavigateOnClickListener(R.id.action_ads_to_addAds,bundle).onClick(itemView);
 
                 }
         });

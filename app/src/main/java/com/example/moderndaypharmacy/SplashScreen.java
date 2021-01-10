@@ -131,7 +131,7 @@ public class SplashScreen extends Fragment {
                 }else{
                     sharedPreference.addUser(userInfo);
                     Intent done ;
-                    if(userInfo.getType().equals("User")){
+                    if(!userInfo.getType().equals("User")){
                          done = new Intent(getContext(), MainPage.class);
                     }else {
 
