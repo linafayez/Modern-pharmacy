@@ -142,6 +142,7 @@ public class Checkout extends Fragment {
                     Order.setVisibility(View.INVISIBLE);
                     orderModel = new OrderModel(uniqueID, FirebaseAuth.getInstance().getCurrentUser().getUid(),data,timestamp,"confirmed",Double.parseDouble(tickerView.getText().split("JD")[0]));
                     orderModel.setTime(timestamp);
+                    if(scanModels!= null)
                     orderModel.setScanModels(scanModels);
 
                     if(note.getText()!= null)
