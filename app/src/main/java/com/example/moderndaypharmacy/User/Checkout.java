@@ -46,12 +46,9 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 public class Checkout extends Fragment {
     RecyclerView items,scans;
@@ -86,9 +83,9 @@ public class Checkout extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-         DecimalFormat df2 = new DecimalFormat("#.##");
+        DecimalFormat df2 = new DecimalFormat("#.##");
         Order = view.findViewById(R.id.Order);
-        scans= view.findViewById(R.id.scans);
+        scans = view.findViewById(R.id.scans);
         tickerView = view.findViewById(R.id.tickerView);
         note = view.findViewById(R.id.note);
         db = FirebaseFirestore.getInstance();
@@ -107,24 +104,26 @@ public class Checkout extends Fragment {
         data = new ArrayList<>();
         data = sharedPreference.getCartData();
         scanModels = sharedPreference.getCartScanData();
-        tickerView.setText(df2.format(TextViewUtil.setSubTotal(data) + 3 )+ "JD");
+        tickerView.setText(df2.format(TextViewUtil.setSubTotal(data) + 3) + "JD");
         subTotal.setText(df2.format(TextViewUtil.setSubTotal(data)) + "JD");
         //total.setText();
         shipping.setText("3JD");
-      RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         RecyclerView.LayoutManager manager2 = new LinearLayoutManager(getContext());
-     // Cart.changed.setTotal(data);
-       adapter = new ItemsAdapter(getContext(), data);
-       scanAdapter = new ScanAdapter(scanModels, getContext(),"ch");
-       scans.setLayoutManager(manager2);
-       scans.setHasFixedSize(false);
-       scans.setAdapter(scanAdapter);
-      items.setLayoutManager(manager);
-      items.setHasFixedSize(false);
-      items.setAdapter(adapter);
-        if(scanModels.size()>0) {
-            upladImages(scanModels);
+        // Cart.changed.setTotal(data);
+        adapter = new ItemsAdapter(getContext(), data);
+        scanAdapter = new ScanAdapter(scanModels, getContext(), "ch");
+        scans.setLayoutManager(manager2);
+        scans.setHasFixedSize(false);
+        scans.setAdapter(scanAdapter);
+        items.setLayoutManager(manager);
+        items.setHasFixedSize(false);
+        items.setAdapter(adapter);
+        if(scanModels!=null){
+            if (scanModels.size() > 0) {
+                upladImages(scanModels);
         }
+    }
       ApplyVoucher.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {

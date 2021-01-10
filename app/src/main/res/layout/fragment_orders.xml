@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".User.Orders">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
@@ -32,7 +44,7 @@
                 android:text="Your Order"
                 android:textStyle="bold"
                 android:textSize="25sp"
-                android:textColor="#563185"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,89 +162,53 @@
         android:background="@drawable/text_view"
 
         />
+    <TextView
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:text="Scan Cart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/s" />
 
-
-
-
+    <TextView
+        android:id="@+id/p"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:text="Products List"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note" />
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/product"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt1"
+        app:layout_constraintTop_toBottomOf="@+id/p"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </ScrollView>
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--
-        <TextView
-            android:id="@+id/txt2"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/items"
-            android:layout_marginTop="46dp"
-            android:layout_marginStart="10dp"
-            android:text="Delivered On"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            android:textStyle="bold"
-
-            />
-
-        <EditText
-            android:id="@+id/editTextDate"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="Select Date"
-            android:gravity="center"
-            app:layout_constraintStart_toEndOf="@+id/txt2"
-            app:layout_constraintTop_toBottomOf="@+id/items"
-            app:layout_constraintLeft_toRightOf="@+id/txt2"
-
-            />
-        <TextView
-            android:id="@+id/txt3"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/editTextDate"
-            app:layout_constraintTop_toBottomOf="@+id/items"
-            android:layout_marginTop="46dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="5dp"
-            android:text="at"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            android:textStyle="bold"
-
-            />
-            <EditText
-                android:id="@+id/editTextTime"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="time"
-                android:hint="Select Time"
-                app:layout_constraintLeft_toRightOf="@+id/txt3"
-                app:layout_constraintStart_toEndOf="@+id/txt3"
-                app:layout_constraintTop_toBottomOf="@+id/total"
-               />
-    -->
 
 

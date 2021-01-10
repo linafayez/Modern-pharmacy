@@ -1,8 +1,14 @@
 package com.example.moderndaypharmacy.User;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +25,6 @@ import androidx.fragment.app.Fragment;
 import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.R;
 import com.squareup.picasso.Picasso;
-
 
 
 public class ProductView extends Fragment {
@@ -59,12 +64,12 @@ public class ProductView extends Fragment {
         //data = new ArrayList<>();
         desc.setMovementMethod(new ScrollingMovementMethod());
 
+
         if( productModel!=null) {
 
             name.setText(productModel.getName());
             price.setText((productModel.getPrice() / 100 + " " + "JD"));
-            desc.setText(productModel.getDesc());
-           // rate.setRating(productModel.getRating());
+            addReadMore(productModel.getDesc(),desc);
             if (productModel!=null && productModel.getPic() != null){
                 Picasso.get().load(Uri.parse(productModel.getPic().get(0))).into(image);
             }
@@ -72,6 +77,9 @@ public class ProductView extends Fragment {
                addToCart.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
+                       if(productModel.getItemNumberInCart() == 0){
+                           productModel.setItemNumberInCart(1);
+                       }
                        sharedPreference.addToCart(productModel);
                        Toast.makeText(getActivity(), "Added to Cart", Toast.LENGTH_SHORT).show();
                    }
@@ -80,10 +88,51 @@ public class ProductView extends Fragment {
 
         }
 
+    }
+    private void addReadMore(final String text, final TextView textView) {
+        SpannableString ss = new SpannableString(text.substring(0, 100) + "... read more");
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                addReadLess(text, textView);
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    ds.setColor(getResources().getColor(R.color.colorPrimary));
+                } else {
+                    ds.setColor(getResources().getColor(R.color.colorPrimary));
+                }
+            }
+        };
+        ss.setSpan(clickableSpan, ss.length() - 10, ss.length() , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(ss);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
 
+    private void addReadLess(final String text, final TextView textView) {
+        SpannableString ss = new SpannableString(text + " read less");
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                addReadMore(text, textView);
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    ds.setColor(getResources().getColor(R.color.colorPrimary));
+                } else {
+                    ds.setColor(getResources().getColor(R.color.colorPrimary));
+                }
+            }
+        };
+        ss.setSpan(clickableSpan, ss.length() - 10, ss.length() , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(ss);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
-
-
-
 

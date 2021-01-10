@@ -21,6 +21,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class OrdersManagement extends Fragment {
     RecyclerView order;
     FirebaseFirestore db;
@@ -64,6 +67,10 @@ public class OrdersManagement extends Fragment {
                 holder.total.setText(model.getTotal()+"JD");
                 holder.orderId.setText("Order ID: "+model.getId().subSequence(0,10));
                 holder.UserId.setText("User ID: "+model.getUserId().subSequence(0,10));
+                Date date=model.getTime().toDate();
+                // DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
+                holder.Date.setText(DateFormat.getDateInstance().format(date));
+                holder.time.setText(DateFormat.getTimeInstance().format(date));
             }
         };
 
