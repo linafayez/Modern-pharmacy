@@ -131,8 +131,9 @@ public class SplashScreen extends Fragment {
                 }else{
                     sharedPreference.addUser(userInfo);
                     Intent done ;
-                    if(!userInfo.getType().equals("User")){
+                    if(userInfo.getType().equals("User")){
                          done = new Intent(getContext(), MainPage.class);
+                         Toast.makeText(getContext(),userInfo.getId(),Toast.LENGTH_LONG).show();
                     }else {
 
                          done = new Intent(getContext(), AdminPanel.class);
