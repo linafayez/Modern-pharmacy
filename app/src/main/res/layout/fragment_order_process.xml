@@ -1,179 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Admin.OrderProcess">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_margin="7dp"
         android:padding="7dp"
         android:text="Order Id"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="42dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/orderId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/id"
-        android:layout_alignParentEnd="true"
         android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_marginStart="10dp"
+        android:padding="7dp"
         android:text=""
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/id"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
         android:id="@+id/userId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/id"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="@+id/id"
         android:layout_marginStart="7dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="7dp"
-        android:paddingStart="10dp"
+        android:paddingStart="7dp"
         android:paddingEnd="10dp"
         android:text="User Id"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="109dp" />
+        tools:layout_editor_absoluteY="109dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id"/>
 
     <TextView
         android:id="@+id/UserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/userId"
-        android:layout_below="@+id/orderId"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="12dp"
-        android:padding="10dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"
         android:text=""
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/userId"
+        app:layout_constraintTop_toBottomOf="@+id/orderId"
         />
 
     <TextView
         android:id="@+id/txt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userId"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="@+id/spinner"
         android:layout_marginStart="7dp"
         android:layout_marginTop="40dp"
-        android:gravity="center"
         android:text="Order State:"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userId"
         />
 
-
-    <!--<EditText
-        android:id="@+id/OrderState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/UserId"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="7dp"
-        android:layout_toRightOf="@+id/txt1"
-        android:text="Request"
-        android:textColor="#e80505"
-        android:textSize="16sp"
-       />
--->
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="138dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txt1"
-        android:layout_alignBottom="@+id/txt1"
         android:layout_marginStart="7dp"
-        android:layout_marginTop="4dp"
-        android:layout_toEndOf="@+id/txt1"
+        android:layout_marginTop="45dp"
         android:entries="@array/orderState"
+        app:layout_constraintStart_toEndOf="@+id/txt1"
+        app:layout_constraintTop_toBottomOf="@+id/UserId"
         />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/UserId"
-        android:layout_alignTop="@+id/txt1"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@+id/spinner"
-        android:gravity="center"
+        android:layout_marginTop="40dp"
         android:text="Total :"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/UserId"/>
 
 
     <EditText
         android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_below="@+id/userId"
-        android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginStart="7dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="7dp"
-
-        android:gravity="center"
         android:text="15JD"
         android:textColor="#e80505"
         android:textSize="15sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="334dp"
-        tools:layout_editor_absoluteY="268dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/UserId"/>
 
     <TextView
         android:id="@+id/itemList"
         android:layout_margin="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
         android:text="Items List"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"/>
     <Button
         android:id="@+id/button"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/total"
         android:background="@drawable/button"
         android:textColor="#FFFFFF"
-        android:text="update" />
+        android:text="update"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"/>
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/itemList"
+            app:layout_constraintStart_toStartOf="@+id/itemList"
+            app:layout_constraintTop_toBottomOf="@+id/button"
+
             >
 
             <androidx.recyclerview.widget.RecyclerView
@@ -182,10 +171,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="7dp"
+                android:layout_marginTop="35dp"
 
                 />
-
-
         </LinearLayout>
+    <TextView
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:text="Scan Cart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/s" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

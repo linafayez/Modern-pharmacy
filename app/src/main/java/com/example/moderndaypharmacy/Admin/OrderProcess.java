@@ -1,5 +1,6 @@
 package com.example.moderndaypharmacy.Admin;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,7 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moderndaypharmacy.Models.OrderModel;
 import com.example.moderndaypharmacy.Models.ProductModel;
+import com.example.moderndaypharmacy.Models.ScanModel;
 import com.example.moderndaypharmacy.R;
+import com.example.moderndaypharmacy.User.SharedPreference;
 import com.example.moderndaypharmacy.User.feedbackArgs;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,15 +36,17 @@ import java.util.ArrayList;
 
 
 public class OrderProcess extends Fragment {
-    TextView itemsList,orderId,UserId,OrderState,time,Date,total,OId,UId;
+    TextView itemsList,orderId,UserId,OrderState,time,Date,total,OId,UId,txt;
     EditText Total,State;
     Button update;
     OrderModel orderModel,ordersModel;
-    RecyclerView products;
-    RecyclerView.Adapter adapter;
+    RecyclerView products,scan;
+    RecyclerView.Adapter adapter,adapter2;
     Spinner spinner;
     String newTotal="";
     RatingBar rate;
+    ArrayList<ScanModel> scanModels;
+
 
     public OrderProcess() {
         // Required empty public constructor
@@ -74,6 +79,9 @@ public class OrderProcess extends Fragment {
         update=view.findViewById(R.id.button);
         products=view.findViewById(R.id.productList);
         spinner=view.findViewById(R.id.spinner);
+        scan=view.findViewById(R.id.scan);
+        txt=view.findViewById(R.id.s);
+        scanModels = orderModel.getScanModels();
 
         ArrayAdapter<String> spinadapter = new ArrayAdapter (this.getContext(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.orderState));
         spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -90,7 +98,6 @@ public class OrderProcess extends Fragment {
             products.setHasFixedSize(false);
             products.setAdapter(adapter);
 
-
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -103,7 +110,6 @@ public class OrderProcess extends Fragment {
                 }
             });
 
-
             update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -115,7 +121,7 @@ public class OrderProcess extends Fragment {
                     {
                         newTotal=Total.getText().toString();
                         Total.setText(newTotal);
-                        orderModel.setTotal(Double.valueOf(String.valueOf(newTotal)));
+                        orderModel.setTotal(Double.parseDouble(String.valueOf(newTotal)));
 
                     }
                     Toast.makeText(view.getContext(), "Data updated", Toast.LENGTH_SHORT).show();
@@ -128,6 +134,19 @@ public class OrderProcess extends Fragment {
 
                 }
                });
+
+            if(scanModels!=null) {
+                if (scanModels.size() == 0) {
+                    txt.setVisibility(View.INVISIBLE);
+                }
+                RecyclerView.LayoutManager manager2 = new LinearLayoutManager(getContext());
+                //adapter2 = new ScanAdapter(scanModels, getContext(), "cart");
+                adapter2=new ScanRAdapter(orderModel.getScanModels(),getContext(),"cart");
+                scan.setLayoutManager(manager2);
+                scan.setHasFixedSize(false);
+                scan.setAdapter(adapter2);
+
+            }
         }
 
     }
@@ -152,25 +171,25 @@ public class OrderProcess extends Fragment {
             holder.name.setText(P.getName());
             holder.price.setText(P.getPrice()/100+" "+"JD");
             Picasso.get().load(Uri.parse(P.getPic().get(0))).into(holder.image);
-            if(orderModel.getOrderState().equals("Delivered")||orderModel.getOrderState().equals("Completed")) {
+           /* if(orderModel.getOrderState().equals("Delivered")||orderModel.getOrderState().equals("Ordered")) {
                 if (orderModel.getFeedbackModel().getModels()!=null&&orderModel.getFeedbackModel().getModels().get(position).getRating() != null&&orderModel.getFeedbackModel().getModels().get(position).getNote() != null)
-                {
+              //  {
                     update.setVisibility(View.INVISIBLE);
                     holder.note.setVisibility(View.VISIBLE);
                     holder.rate.setVisibility(View.VISIBLE);
                     holder.rate.setRating(Float.parseFloat(orderModel.getFeedbackModel().getModels().get(position).getRating()));
                     holder.note.setText(orderModel.getFeedbackModel().getModels().get(position).getNote());
-                }
+               // }
             }
 
 
-            if(orderModel.getOrderState().equals("Ordered"))
+            if(orderModel.getOrderState().equals("Confirmed"))
             {
                 update.setVisibility(View.INVISIBLE);
                 holder.note.setVisibility(View.INVISIBLE);
                 holder.rate.setVisibility(View.INVISIBLE);
 
-            }
+            }*/
         }
 
         @Override
@@ -214,7 +233,71 @@ public class OrderProcess extends Fragment {
                     }
                 });
 
+            }
+        }
+    }
 
+    public class ScanRAdapter extends  RecyclerView.Adapter<ScanRAdapter.ScanViewHolder> {
+        ArrayList<ScanModel> models;
+        Context context;
+        String type;
+        public ScanRAdapter( ArrayList<ScanModel> models, Context context,String type){
+            this.models =models;
+            this.context = context;
+            this.type=type;
+        }
+        @NonNull
+        @Override
+        public ScanRAdapter.ScanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scan,parent,false);
+
+            return new ScanRAdapter.ScanViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ScanRAdapter.ScanViewHolder holder, int position) {
+            Picasso.get().load(Uri.parse(models.get(position).getImage())).into(holder.image);
+            holder.text.setText(models.get(position).getPrice());
+        }
+
+        @Override
+        public int getItemCount() {
+            return models == null?0:models.size();
+        }
+
+        public class ScanViewHolder extends RecyclerView.ViewHolder {
+            ImageView image,delete;
+            SharedPreference sharedPreference;
+            Button done;
+            TextView price;
+            EditText text;
+            public ScanViewHolder(@NonNull final View itemView) {
+                super(itemView);
+                sharedPreference = new SharedPreference(itemView.getContext());
+                image = itemView.findViewById(R.id.imageView13);
+                delete = itemView.findViewById(R.id.imageView5);
+                done=itemView.findViewById(R.id.ok);
+                price=itemView.findViewById(R.id.price);
+                text=itemView.findViewById(R.id.text);
+
+                if(type.equals("cart")){
+                    delete.setVisibility(View.INVISIBLE);
+                }
+
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String p= String.valueOf(text.getEditableText());
+                        orderModel.getScanModels().get(getAdapterPosition()).setPrice(p);
+                        FirebaseFirestore.getInstance().collection("Orders").document(orderModel.getId()).set(orderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        });
+
+
+                    }
+                });
             }
         }
     }

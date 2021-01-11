@@ -25,7 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UserOrder extends Fragment {
 RecyclerView order;
@@ -67,9 +69,16 @@ RecyclerView order;
                holder.state.setText(model.getOrderState());
                if(model.getProductList() != null && model.getProductList().size()!= 0 && model.getProductList().get(0).getPic().get(0)!= null )
                Picasso.get().load(Uri.parse(model.getProductList().get(0).getPic().get(0))).into(holder.image);
-               holder.id.setText("#OrderId"+model.getId().substring(0,7));
-//                holder.Date.setText(model.getTime().toDate()+"");
+               holder.id.setText("#OrderId:"+" "+model.getId().substring(0,7));
+             //   holder.Date.setText(model.getTime().toDate()+"");
+                Date date=model.getTime().toDate();
+               // DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
+                holder.Date.setText(DateFormat.getDateInstance().format(date));
+                holder.time.setText(DateFormat.getTimeInstance().format(date));
                 //   holder.Items.setText(TextViewUtil.ItemsName(model.getProductsModels()));
+
+
+
             }
         };
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
@@ -92,13 +101,14 @@ RecyclerView order;
         adapter.stopListening();
     }
     class OrderViewHolder extends RecyclerView.ViewHolder{
-        TextView Date, Items , total , state,id;
+        TextView Date, Items , total , state,id,time;
         ImageView image;
         ArrayList products;
         Button userOrder;
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
-//            Date = itemView.findViewById(R.id.time);
+           Date = itemView.findViewById(R.id.date);
+           time=itemView.findViewById(R.id.time);
             //    Items = itemView.findViewById(R.id.items);
             total = itemView.findViewById(R.id.textView12);
             state= itemView.findViewById(R.id.OrderState);

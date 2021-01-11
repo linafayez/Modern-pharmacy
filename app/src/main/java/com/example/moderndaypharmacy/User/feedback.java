@@ -2,14 +2,6 @@ package com.example.moderndaypharmacy.User;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moderndaypharmacy.Models.FeedbackModel;
 import com.example.moderndaypharmacy.Models.OrderModel;
@@ -26,7 +25,6 @@ import com.example.moderndaypharmacy.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -123,7 +121,7 @@ public class feedback extends Fragment {
     }
 
     public static class Change{
-        public static void uploadFeedBack(FeedbackModel feedbackModel, final View view){
+        public static void uploadFeedBack(final FeedbackModel feedbackModel, final View view){
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date);
             feedbackModel.setOrderId(orderModel.getId());
@@ -131,12 +129,15 @@ public class feedback extends Fragment {
             feedbackModel.setTimestamp(timestamp);
             feedbackModel.setUser(user);
 
-            feedbackModel.setProductsModels(models);
+           feedbackModel.setProductsModels(models);
+           //  feedbackModel.setProductsModels(pro);
+
             orderModel.setFeedbackModel(feedbackModel);
             // feedbackModel.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
             //feedbackModel.
             // orderModel.set
             for (int i=0;i<models.size();i++) {
+                final int finalI = i;
                 FirebaseFirestore.getInstance().collection("Products").document(models.get(i).getID()).set(models.get(i)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -167,9 +168,11 @@ public class feedback extends Fragment {
             feeds.add(feed);
             System.out.println(""+feeds.size());
             feedbackModel.setModels(feeds);
+
             System.out.println(""+feeds.get(0).getNote());
             if(models.size()>0){
                 // product.setRating((product.getRating()+rating)/2);
+               // product.setRating(product.getRating());
                 for (int i = 0; i < models.size(); i++) {
                     if (product.getID().equals(models.get(i).getID())){
                         models.set(i,product);
@@ -177,23 +180,32 @@ public class feedback extends Fragment {
                         break;
                     }
                 }
+
+
             }
 
             if(a==0){
                 models.add(product);
                 System.out.println("done1");
+
             }
+
+
+
 
             // feedbackModel.setModels();
 
         }
-        public static ArrayList<ProductModel> getProducts(ArrayList<ProductModel> products) {
+        public static ArrayList<ProductModel> getProducts(final ArrayList<ProductModel> products) {
             final ArrayList<ProductModel> models= new ArrayList<>();
             for(int i= 0 ;i<products.size();i++){
+                final int finalI = i;
                 FirebaseFirestore.getInstance().collection("Products").document(products.get(i).getID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         models.add(documentSnapshot.toObject(ProductModel.class));
+
+
                     }
                 });
             }

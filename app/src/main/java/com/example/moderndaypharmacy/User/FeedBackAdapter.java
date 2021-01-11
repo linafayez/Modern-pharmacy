@@ -66,6 +66,7 @@ static String UID;
                     }
 
 
+
                 }
 
             }
@@ -128,7 +129,8 @@ static String UID;
                             //do what you wish
                             if(rating.getNumStars()!=0){
                                 //productsModels
-                                feedback.Change.updateProducts(pro.get(getAdapterPosition()),rating.getRating(),note.getEditText().getText().toString(), getAdapterPosition());
+                               feedback.Change.updateProducts(pro.get(getAdapterPosition()),rating.getRating(),note.getEditText().getText().toString(), getAdapterPosition());
+
                             }
 
                         }
@@ -153,6 +155,7 @@ static String UID;
                             if(rating.getNumStars()!=0&& !note.getEditText().getText().equals(null)){
                                 //productsModels
                                 feedback.Change.updateProducts(pro.get(getAdapterPosition()),rating.getRating(),note.getEditText().getText().toString(), getAdapterPosition());
+
                             }
 
                         }
