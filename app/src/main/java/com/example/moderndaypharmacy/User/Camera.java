@@ -48,12 +48,6 @@ public class Camera extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
     }
 
     @Override

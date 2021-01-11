@@ -54,29 +54,18 @@ public class mapFragment extends FragmentActivity implements OnMapReadyCallback 
                     LatLng latLng= new LatLng(address.getLatitude(),address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng).title(location));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-
-
                 }
                 return false;
-
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 return false;
             }
-
         });
         mapFragment.getMapAsync(this);
-
 return view;
     }
-
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
     }
 }

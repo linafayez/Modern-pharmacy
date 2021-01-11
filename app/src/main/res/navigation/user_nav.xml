@@ -142,7 +142,6 @@
         android:label="fragment_query"
         tools:layout="@layout/fragment_query"/>
 
-
     <activity
         android:id="@+id/camera"
         android:name="com.example.moderndaypharmacy.User.Camera"

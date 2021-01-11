@@ -9,13 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <Button
             android:id="@+id/addToCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="280dp"
-            android:layout_marginBottom="4dp"
-            android:text="add to cart"
+            android:layout_width="68dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="192dp"
+            android:layout_marginBottom="68dp"
+            android:text="add tocart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -23,7 +24,7 @@
             android:id="@+id/proImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,18 +33,23 @@
 
         <TextView
             android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="37dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="220dp"
             android:text="TextView"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/proImage" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="130dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="116dp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/proImage"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/proImage"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
