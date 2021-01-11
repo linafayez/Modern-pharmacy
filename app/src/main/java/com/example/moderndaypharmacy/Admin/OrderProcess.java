@@ -41,7 +41,8 @@ public class OrderProcess extends Fragment {
     Button update;
     OrderModel orderModel,ordersModel;
     RecyclerView products,scan;
-    RecyclerView.Adapter adapter,adapter2;
+    RecyclerView.Adapter adapter;
+    ScanRAdapter adapter2;
     Spinner spinner;
     String newTotal="";
     RatingBar rate;
@@ -81,7 +82,7 @@ public class OrderProcess extends Fragment {
         spinner=view.findViewById(R.id.spinner);
         scan=view.findViewById(R.id.scan);
         txt=view.findViewById(R.id.s);
-        scanModels = orderModel.getScanModels();
+
 
         ArrayAdapter<String> spinadapter = new ArrayAdapter (this.getContext(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.orderState));
         spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -91,7 +92,7 @@ public class OrderProcess extends Fragment {
             Total.setText(orderModel.getTotal()+"");
             OId.setText(orderModel.getId());
             UId.setText(orderModel.getUserId());
-
+            scanModels = orderModel.getScanModels();
             RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
             adapter= new ProductAdapter(orderModel.getProductList());
             products.setLayoutManager(manager);
