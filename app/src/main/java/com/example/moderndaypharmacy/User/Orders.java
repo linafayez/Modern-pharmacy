@@ -264,7 +264,11 @@ public class Orders extends Fragment {
             @Override
             public void onBindViewHolder(@NonNull ScanRAdapter.ScanViewHolder holder, int position) {
                 Picasso.get().load(Uri.parse(models.get(position).getImage())).into(holder.image);
-                holder.text.setText(models.get(position).getPrice());
+              holder.text.setText(models.get(position).getPrice());
+                if(models.get(position).getPrice()== null) {
+                    holder.done.setVisibility(View.INVISIBLE);
+                    holder.text.setText("not processed");
+                }
             }
 
             @Override
@@ -274,13 +278,11 @@ public class Orders extends Fragment {
 
             public class ScanViewHolder extends RecyclerView.ViewHolder {
                 ImageView image,delete;
-                SharedPreference sharedPreference;
                 Button done;
                 TextView price;
                 EditText text;
                 public ScanViewHolder(@NonNull final View itemView) {
                     super(itemView);
-                    sharedPreference = new SharedPreference(itemView.getContext());
                     image = itemView.findViewById(R.id.imageView13);
                     delete = itemView.findViewById(R.id.imageView5);
                     done=itemView.findViewById(R.id.ok);
@@ -292,6 +294,7 @@ public class Orders extends Fragment {
                     if(type.equals("cart")){
                         delete.setVisibility(View.VISIBLE);
                     }
+
                     delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -305,6 +308,7 @@ public class Orders extends Fragment {
 
                         }
                     });
+
                     done.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

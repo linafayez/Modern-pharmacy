@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.moderndaypharmacy.Models.ProductModel;
 import com.example.moderndaypharmacy.Models.ScanModel;
 import com.example.moderndaypharmacy.R;
 import com.example.moderndaypharmacy.Util.TextViewUtil;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -152,8 +154,7 @@ public class Checkout extends Fragment {
                 } else {
                     goToMap();
                 }
-                // orderModel.setTime(timestamp);
-                //UploadOrder(orderModel);
+
             }
         });
         addAdders.setOnClickListener(new View.OnClickListener() {
@@ -240,11 +241,16 @@ public class Checkout extends Fragment {
         @Override
         public void onSuccess(Void aVoid) {
 
-            sharedPreference.SaveCart(new ArrayList<ProductModel>());
-            sharedPreference.SaveScanCart(new ArrayList<ScanModel>());
+            SharedPreference.SaveCart(new ArrayList<ProductModel>());
+            SharedPreference.SaveScanCart(new ArrayList<ScanModel>());
             Navigation.findNavController(getView()).navigate(R.id.action_checkout_to_userOrder);
 
 
+        }
+    }).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+            Log.e("not upload",e.getMessage());
         }
     });
 
