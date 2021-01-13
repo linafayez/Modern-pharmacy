@@ -317,8 +317,8 @@ public class Orders extends Fragment {
                             double t=Double.parseDouble(p)+orderUser.getTotal();
                             Total.setText(String.valueOf(t));
                             orderUser.setTotal(t);
-                            scan.get(getAdapterPosition()).setPrice(String.valueOf(t));
-                            scanModel.setPrice(scan.get(getAdapterPosition()).getPrice());
+                           // scan.get(getAdapterPosition()).setPrice(String.valueOf(t));
+                            scanModel.setPrice(text.getText().toString());
                             scanModel.setImage(scan.get(getAdapterPosition()).getImage());
                             scanModel.setId(scan.get(getAdapterPosition()).getId());
                             orderUser.setScanModels(scan);
