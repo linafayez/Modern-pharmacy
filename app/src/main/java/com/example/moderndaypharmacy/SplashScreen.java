@@ -39,7 +39,7 @@ public class SplashScreen extends Fragment {
     FirebaseUser currentUser;
     private static final int RC_SIGN_IN = 123;
     private static final String TAG = "SignIn";
-
+     SharedPreference sharedPreference;
     public SplashScreen() {
         // Required empty public constructor
     }
@@ -54,12 +54,25 @@ public class SplashScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        if(currentUser == null){
-            auth();
-        }else{
-            updateUI(currentUser);
+         sharedPreference = new SharedPreference(getContext());
+        if (sharedPreference.getUser() != null) {
+            Intent done ;
+            if(sharedPreference.getUser().getType().equals("User")){
+                done = new Intent(getContext(), MainPage.class);
+            }else {
+
+                done = new Intent(getContext(), AdminPanel.class);
+            }
+            startActivity(done);
+
+        }else {
+            mAuth = FirebaseAuth.getInstance();
+            currentUser = mAuth.getCurrentUser();
+            if (currentUser == null) {
+                auth();
+            } else {
+                updateUI(currentUser);
+            }
         }
 
     }
@@ -69,7 +82,7 @@ public class SplashScreen extends Fragment {
             @Override
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(1000);
                     List<AuthUI.IdpConfig> providers = Arrays.asList(
                             new AuthUI.IdpConfig.EmailBuilder().build(),
                             new AuthUI.IdpConfig.PhoneBuilder().build()
@@ -119,7 +132,7 @@ public class SplashScreen extends Fragment {
     }
     public void updateUI(@Nullable final FirebaseUser user) {
         if(user != null){
-            final SharedPreference sharedPreference = new SharedPreference(getContext());
+
         FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -133,7 +146,6 @@ public class SplashScreen extends Fragment {
                     Intent done ;
                     if(userInfo.getType().equals("User")){
                          done = new Intent(getContext(), MainPage.class);
-                         Toast.makeText(getContext(),userInfo.getId(),Toast.LENGTH_LONG).show();
                     }else {
 
                          done = new Intent(getContext(), AdminPanel.class);

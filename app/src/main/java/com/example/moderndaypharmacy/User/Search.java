@@ -94,7 +94,7 @@ public class Search extends Fragment {
 
         //  Toast.makeText(SearchActivity.this, "Started Search", Toast.LENGTH_LONG).show();
 
-        Query firebaseSearchQuery = FirebaseFirestore.getInstance().collection("Products").orderBy("name").startAt(newText).endAt(newText + "\uf8ff");
+        Query firebaseSearchQuery = FirebaseFirestore.getInstance().collection("Products").orderBy("name").startAt(newText.toUpperCase()).endAt(newText.toLowerCase() + "\uf8ff");
         options = new FirestoreRecyclerOptions.Builder<ProductModel>()
                 .setQuery(firebaseSearchQuery, ProductModel.class)
                 .build();

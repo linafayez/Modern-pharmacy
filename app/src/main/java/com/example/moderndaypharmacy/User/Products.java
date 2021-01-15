@@ -110,7 +110,7 @@ Button addToCart;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!getArguments().equals(null) && getArguments().get("type").equals("editProduct")){
+                    if (!getArguments().equals(null) && getArguments().get("type")!= null && getArguments().get("type").equals("editProduct")){
                         Gson gson = new Gson();
                         bundle.putString("type", gson.toJson(response.getSnapshots().get(getAdapterPosition())));
                         Navigation.findNavController(getView()).navigate(R.id.action_products2_to_addProduct,bundle);

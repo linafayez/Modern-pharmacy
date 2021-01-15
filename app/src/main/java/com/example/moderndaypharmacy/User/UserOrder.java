@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ RecyclerView order;
     FirebaseFirestore db;
     FirestoreRecyclerAdapter adapter;
     FirestoreRecyclerOptions<OrderModel> options;
+    SharedPreference sharedPreference;
     public UserOrder() {
         // Required empty public constructor
     }
@@ -49,8 +51,9 @@ RecyclerView order;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         order = view.findViewById(R.id.orders);
+        sharedPreference = new SharedPreference(getContext());
         db = FirebaseFirestore.getInstance();
-        Query query = db.collection("Orders").whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query query = db.collection("Orders").whereEqualTo("userId", sharedPreference.getUser().getId());
         options = new FirestoreRecyclerOptions.Builder<OrderModel>()
                 .setQuery(query,OrderModel.class)
                 .build();
